@@ -1,0 +1,79 @@
+.card-body {
+  width: 1320px;
+    padding-top: 10px;
+    border-radius: 2px;
+    display: flex;
+}
+
+.card-left-body {
+  position: relative;
+  text-align: center;
+  width: 15%; 
+  border-right: 2px solid black;
+  margin-right: 10px;
+  padding-right: 10px;
+  
+}
+.card-right-parent{
+    /* flex-wrap: nowrap; */
+    width: 85%;
+    display: flex;
+}
+.card-right-body {
+  padding: 0 10px;
+  width: 100%;
+  
+}
+
+
+.card-left-body h1 {
+  text-align: center;
+  font-size: medium;
+  position: relative;
+}
+
+.btn-mca {
+  width: 150px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.5s;
+  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  -webkit-animation: gradbar 15s ease infinite;
+  -moz-animation: gradbar 15s ease infinite;
+  animation: gradbar 15s ease infinite;
+}
+
+.btn-mca:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(224, 24, 24, 0.2);
+}
+
+/* Dropdown Content (Hidden by Default) */
+/* .li-btn-mca {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+} */
+
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}

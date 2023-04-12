@@ -1,0 +1,126 @@
+.layout-div {
+    border-radius: 5px;
+    border: 2px solid;
+    background-color: yellowgreen transparent;
+    height: 530px;
+    width: 90%;
+    margin: 3% auto;
+    box-shadow: 0 2px 4px 0 rgba(153, 44, 44, 1);
+
+}
+
+.left-div-image {
+    height: 150px;
+    width: 100px;
+    margin-top: 5px;
+    margin-left: 5px;
+
+}
+.line-div{
+padding-left: 203px;
+padding-right: 55px;
+border-style: solid;
+}
+.remove-div
+{
+ margin-top: 65px;   
+}
+.main-div {
+    display: flex;
+    height: 400px;
+    width: 95%;
+    margin: 2% auto;
+    background-color: antiquewhite transparent;
+    border-radius: 1%;
+
+}
+
+.right-div h1 {
+    padding-top: 30px;
+
+}
+.right-div p {
+
+margin-top: 40px;
+font-size: xx-large;
+font-weight: bolder;
+
+
+}
+
+.heading {
+    color: rgb(66, 66, 156);
+    font-size: x-large;
+    text-align: center;
+    margin-top: 2%;
+}
+.items-div{
+  display: flex;
+  justify-content: center; 
+justify-content: space-around;
+}
+
+.left-div {
+    justify-content: space-around;
+    border-radius: 5px;
+    border: 1px solid;
+    background-color: yellowgreen transparent;
+    height: 350px;
+    width: 70%;
+    margin: 2% auto;
+    box-shadow: 0 2px 4px 0 rgba(153, 44, 44, 1);
+    padding: 10px;
+}
+
+.title-div {
+    margin-top: 65px;
+
+}
+
+.amount-div {
+
+    margin-top: 65px;
+}
+
+
+
+
+.right-div {
+    text-align: center;
+    background-color: green transparent;
+    height: 350px;
+    width: 25%;
+    margin: 2% auto;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 0 2px 4px 0 rgba(153, 44, 44, 1);
+}
+
+.btn-project {
+   
+    width: 150px;
+    background-color: #5995fd;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+background-size: 400% 400%;
+-webkit-animation: gradbar 15s ease infinite;
+-moz-animation: gradbar 15s ease infinite;
+animation: gradbar 15s ease infinite;
+  }
+  
+  .check-out-btn:hover{
+    transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(224, 24, 24, 0.2);
+  }
+.remove-div{
+    cursor: pointer;
+}

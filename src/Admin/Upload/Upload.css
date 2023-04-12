@@ -1,0 +1,29 @@
+.upload-div{
+    margin-top: 20px;
+    padding-inline-start: 20px;
+
+}
+.btn-upload{
+    width: 150px;
+    background-color: #5995fd;
+    border: none;
+    outline: none;
+    height: 49px;
+    border-radius: 49px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: 0.5s;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+-webkit-animation: gradbar 15s ease infinite;
+-moz-animation: gradbar 15s ease infinite;
+animation: gradbar 15s ease infinite;
+
+}
+.btn-upload:hover{
+    transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(224, 24, 24, 0.2);
+}
