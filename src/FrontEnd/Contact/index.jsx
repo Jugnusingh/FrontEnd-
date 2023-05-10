@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../login/index.css'
 
-const Login = () => {
+const ContactUs = () => {
   const [inputValue, setInputValue] = useState({
     username: "",
     password: ""
@@ -63,4 +63,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ContactUs

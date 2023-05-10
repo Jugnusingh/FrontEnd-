@@ -21,6 +21,7 @@ function App() {
   const [countCartItems, setCountCartItems] = useState(0)
   const [cartMessage, setCartMessage] = useState()
   const [productData, setProductData] = useState([])
+ 
   const [imageData,setImageData]=useState([])
   const getSliderData = () => {
     axios.get("http://localhost:4000/image")
