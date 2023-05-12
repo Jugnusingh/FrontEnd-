@@ -14,19 +14,21 @@ import UploadBlogs from './Admin/Upload/UploadBlogs';
 import axios from 'axios';
 import Blogs from './FrontEnd/Blogs';
 import Product from './FrontEnd/Product';
+import CategoryForm from './Admin/Upload/CategoryForm';
 
 function App() {
- 
+
   const [cartItems, setCartItems] = useState([])
+  const [categories, setCategories] = useState([]);
   const [countCartItems, setCountCartItems] = useState(0)
   const [cartMessage, setCartMessage] = useState()
   const [productData, setProductData] = useState([])
- 
-  const [imageData,setImageData]=useState([])
+  const [imageData, setImageData] = useState([])
+
   const getSliderData = () => {
     axios.get("http://localhost:4000/image")
       .then((result) => {
-        console.log(result.data.imageData,"imageData")
+        console.log(result.data.imageData, "imageData")
         setImageData(result.data.imageData)
       }).catch(error => {
         console.log(error, "slider Error")
@@ -35,6 +37,7 @@ function App() {
 
   useEffect(() => {
     getSliderData()
+    getCategories()
     // localStorage.setItem("localProductData", JSON.stringify(imageData))
   }, [])
 
@@ -43,9 +46,9 @@ function App() {
     setCountCartItems(countCartItems - curElemt.qty)
   }
   const onAdd = (item) => {
-    console.log(item,"item")
+    console.log(item, "item")
     const itemExist = cartItems.find((x) => x._id === item._id)
-    console.log(itemExist,"itemExist")
+    console.log(itemExist, "itemExist")
     if (itemExist) {
       setCartItems(cartItems.map((x) => x._id === item._id ? { ...itemExist, qty: itemExist.qty + 1 } : x))
     }
@@ -67,15 +70,24 @@ function App() {
     getProductData()
     localStorage.setItem("localProductData", JSON.stringify(productData))
   }, [])
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:4000/categories');
+      setCategories(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-        <div>
+    <div>
       <Navbar countCartItems={countCartItems} />
       <Routes>
-        <Route exact path='/' element={<Home productData={productData} image={imageData}/>} />
+        <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
         <Route exact path='/Assignments' element={<Blogs />} />
         <Route exact path='/Contact' element={<Contact />} />
         <Route exact path="/cart" element={<Cart cartItems={cartItems} data={productData} onRemove={onRemove} countCartItems={countCartItems} />} />
-        <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} />} />
+        <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/Dashboard" element={<Dashboard />} />
         <Route exact path="/All_Order" element={<Order />} />
@@ -83,8 +95,10 @@ function App() {
         <Route exact path="/Stock" element={<Stock />} />
         <Route exact path="/UploadProduct" element={<UploadProduct />} />
         <Route exact path="/UploadBlogs" element={<UploadBlogs />} />
+        <Route exact path="/CategoryForm" element={<CategoryForm categories={categories}/>} />
+
       </Routes>
-      
+
     </div>
   );
 }

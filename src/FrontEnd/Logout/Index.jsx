@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-const Logout = () => {
+function Logout() {
+  const history = useHistory();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    history.push('/login');
+  };
+
   return (
-    <div>Logout</div>
-  )
+    <div>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
 }
 
-export default Logout
+export default Logout;

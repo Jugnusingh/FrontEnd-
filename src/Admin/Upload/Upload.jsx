@@ -14,6 +14,9 @@ const Upload = () => {
   const handleBlogs=(e)=>{
     navigate('/UploadBlogs')
   }
+  const handleCategory=(e)=>{
+    navigate('/CategoryForm')
+  }
 
   return (
     <div>
@@ -24,6 +27,7 @@ const Upload = () => {
           <p>You can upolad your Product hare </p>
           <button className="btn-upload" onClick={handleProduct}>Product Upload</button>
           <button className="btn-upload" onClick={handleBlogs}>Blogs upload</button>
+          <button className="btn-upload" onClick={handleCategory}>Add New Category</button>
           </div>
         </center>
         </div></div>

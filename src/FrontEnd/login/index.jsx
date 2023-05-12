@@ -1,7 +1,47 @@
+// import React from 'react';
+// import axios from 'axios';
+// import Register from '../../Admin/Register';
+
+// const Login = () => {
+//   const [username, setUsername] = React.useState('');
+//   const [password, setPassword] = React.useState('');
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+
+//     axios.post('http://127.0.0.1:4000/login', { username, password })
+//       .then(response => console.log(response.data))
+//       .catch(error => console.log(error));
+//   };
+
+//   return (
+//     <div>
+//       <h1>Login</h1>
+//       <form onSubmit={handleSubmit}>
+//         <div>
+//           <label>Username:</label>
+//           <input type="text" value={username} onChange={event => setUsername(event.target.value)} />
+//         </div>
+//         <div>
+//           <label>Password:</label>
+//           <input type="password" value={password} onChange={event => setPassword(event.target.value)} />
+//         </div>
+//         <button type="submit">Login</button>
+//       </form>
+//       <div>
+//         <Register/>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import '../login/index.css'
+// import '../login/index.css'
 
 const Login = () => {
   const navigate=useNavigate()
