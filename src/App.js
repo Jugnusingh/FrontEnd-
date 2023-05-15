@@ -15,6 +15,34 @@ import axios from 'axios';
 import Blogs from './FrontEnd/Blogs';
 import Product from './FrontEnd/Product';
 import CategoryForm from './Admin/Upload/CategoryForm';
+import Signup from './Admin/Register';
+import "./index.css";
+
+function SearchBar() {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleFocus = () => {
+    setIsActive(true);
+  };
+
+  const handleBlur = () => {
+    setIsActive(false);
+  };
+
+  return (
+    <div className={`search-bar${isActive ? ' active' : ''}`}>
+      <input
+        type="text"
+        placeholder="Search"
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+      />
+      <button type="submit">
+        <i className="fa fa-search"></i>
+      </button>
+    </div>
+  );
+}
 
 function App() {
 
@@ -45,19 +73,20 @@ function App() {
     setCartItems((cartItems.filter((x) => x._id !== curElemt._id)))
     setCountCartItems(countCartItems - curElemt.qty)
   }
+
   const onAdd = (item) => {
     console.log(item, "item")
     const itemExist = cartItems.find((x) => x._id === item._id)
     console.log(itemExist, "itemExist")
     if (itemExist) {
       setCartItems(cartItems.map((x) => x._id === item._id ? { ...itemExist, qty: itemExist.qty + 1 } : x))
-    }
-    else {
+    } else {
       setCartItems([...cartItems, { ...item, qty: 1 }])
     }
     setCountCartItems(countCartItems + 1)
     setCartMessage("added to cart")
   }
+
   const getProductData = () => {
     axios.get("http://localhost:4000/product")
       .then((result) => {
@@ -93,8 +122,9 @@ function App() {
         <Route exact path="/All_Order" element={<Order />} />
         <Route exact path="/Upload" element={<Upload />} />
         <Route exact path="/Stock" element={<Stock />} />
-        <Route exact path="/UploadProduct" element={<UploadProduct />} />
+        <Route exact path="/UploadProduct" element={<UploadProduct categories={categories}/>} />
         <Route exact path="/UploadBlogs" element={<UploadBlogs />} />
+        <Route exact path="/Register" element={<Signup />} />
         <Route exact path="/CategoryForm" element={<CategoryForm categories={categories}/>} />
 
       </Routes>

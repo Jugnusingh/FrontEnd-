@@ -10,18 +10,6 @@ const CategoryForm = ({ categories }) => {
   const [editing, setEditing] = useState(false);
   const [editingId, setEditingId] = useState('');
 
-  // useEffect(() => {
-  //   getCategories();
-  // }, []);
-
-  // const getCategories = async () => {
-  //   try {
-  //     const response = await axios.get('http://127.0.0.1:4000/categories');
-  //     setCategories(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();

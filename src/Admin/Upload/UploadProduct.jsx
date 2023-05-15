@@ -4,10 +4,10 @@ import AdminSidebar from '../../Admin/Dashboard/adminLeftBar/AdminSidebar'
 import Upload from './Upload'
 import "./UploadProduct.css"
 
-const UploadProduct = () => {
+const UploadProduct = ({categories}) => {
     const [Title, setTitle] = useState("");
     const [Description, setDescription] = useState("")
-    const [Category, setCategory] = useState("");
+    const [Category, setCategory] = useState(categories);
     const [Price, setPrice] = useState(0);
     const [Image, setImage] = useState("");
     const [Pdf, setPdf] = useState("");
@@ -25,12 +25,9 @@ const UploadProduct = () => {
         const url = 'http://127.0.0.1:4000/product';
         const response = await fetch(url,
             {
-
                 method: 'POST',
                 body: formData,
-
             });
-
 
         if (response.ok) {
             const data = await response.json();
@@ -67,17 +64,14 @@ const UploadProduct = () => {
                                 <span className="bar"></span>
                             </div>
                             <div className="select">
-                                <select name='Category' classname="format" id="format" onChange={(e) => setCategory(e.target.value)}>
-                                    <option value="Select" >Your Category</option>
-                                    <option value="MCA_New">MCA_New</option>
-                                    <option value="BCA">BCA</option>
-                                    <option value="PGDCA_New">PGDCA_New</option>
-                                    <option value="MBA">MBA</option>
-                                    <option value="java">JAVA</option>
-                                    <option value="PHP"> Php</option>
-                                    <option value=".Net">.Net</option>
-                                    <option value="C++">C++</option>
-                                </select>
+                                <select>
+                                <option value="Select" >Your Category</option>
+                                    {
+                                        Category.map((item)=>{
+                                            return <option>{item.category}</option>
+                                        })
+                                    }
+                                    </select>
                             </div>
                         </div>
                         <div className='upload-div'>

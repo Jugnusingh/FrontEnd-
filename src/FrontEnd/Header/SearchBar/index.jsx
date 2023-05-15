@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import "./index.css"
 
-const SearchBar = ()=>{
+const SearchBar = ({ productData, onSearch }) => {
   const [isActive, setIsActive] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleFocus = () => {
     setIsActive(true);
@@ -13,6 +13,14 @@ const SearchBar = ()=>{
     setIsActive(false);
   };
 
+  const handleSearch = () => {
+    onSearch(searchQuery);
+  }
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  }
+
   return (
     <div className={`search-bar${isActive ? ' active' : ''}`}>
       <input
@@ -20,8 +28,10 @@ const SearchBar = ()=>{
         placeholder="Search"
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onChange={handleInputChange}
+        value={searchQuery}
       />
-      <button type="submit">
+      <button type="submit" onClick={handleSearch}>
         <i className="fa fa-search"></i>
       </button>
     </div>

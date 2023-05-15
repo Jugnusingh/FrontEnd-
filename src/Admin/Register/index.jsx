@@ -1,32 +1,60 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 
-const Register = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+import React, { useState } from "react";
+import axios from "axios";
+import "./index.css"
+
+const Signup = () => {
+  const [username, setUsername] = useState({
+    username:'',
+    email:'',
+    password:''
+  });
+  const handleSignup = (e)=>{
+    const name= e.target.name
+const value = e.target.value
+
+setUsername({
+  ...username,[name]:value
+})
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      // Send a POST request to the server to register the user
-      const response = await axios.post('http://127.0.0.1:4000/User', {
-        username,
-        password
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      const response = await axios.post("http://localhost:4000/admin/signup",username)
+      console.log(response.data.username); // display prompt message
+  } catch (error) {
+    console.error(error);
+  }
+};
+  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Register</button>
+    <form className="formRegister" onSubmit={handleSubmit}>
+      
+      <div className="group">
+        <input type="text"   name="username" onChange={(e) => handleSignup(e)} />
+        <span className="highlight"></span>
+        <span className="bar"></span>
+        <label>UserName</label>
+      </div>
+      <div className="group">
+        <input type="email"   name="email" onChange={(e) => handleSignup(e)} />
+        <span className="highlight"></span>
+        <span className="bar"></span>
+        <label>Email</label>
+      </div>
+
+      <div className="group">
+        <input type="password"  name="password" onChange={(e) => handleSignup(e)} />
+        <span className="highlight"></span>
+        <span className="bar"></span>
+        <label>password</label>
+      </div>
+      <button className="formButton" type="submit">Sign Up</button>
     </form>
   );
 };
 
-export default Register;
+export default Signup;
+

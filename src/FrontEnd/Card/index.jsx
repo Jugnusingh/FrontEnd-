@@ -1,52 +1,84 @@
-import React from 'react'
-import '../Card/Card.css'
-import { MdHelpOutline } from 'react-icons/md'
+import React, { useState } from 'react';
+import '../Card/Card.css';
+import { MdHelpOutline } from 'react-icons/md';
+
 function Card({ onAdd, data, filterProduct }) {
-    console.log(filterProduct,"filter")
-   
-    return (
-        <div className='card-comp'>
-            {
-               filterProduct.length ?  filterProduct.map((item) => {
-                    return (
-                        <>
-                            <div className="flip-card">
-                                <div className="flip-card-inner">
-                                    <div className="flip-card-front">
-                                        <img className="srcimg" src={`http://localhost:4000/uploads/${item.Image}`} alt="img" />
-                                    </div>
-                                    <div className="flip-card-back">
-                                        <h2>{item.Title}</h2>
-                                        <h1>{item.Category}</h1>
-                                        <h1 className="product-price"> ₹ {item.Price}/-</h1>
-                                        <button onClick={() => onAdd(item)} className="buy-button">Buy Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </>
-                    )
-                }) : data.map((item) => {
-                    return (
-                        <>
-                            <div className="flip-card">
-                                <div className="flip-card-inner">
-                                    <div className="flip-card-front">
-                                        <img className="srcimg" src={`http://localhost:4000/uploads/${item.Image}`} alt="img" />
-                                    </div>
-                                    <div className="flip-card-back">
-                                        <h2>{item.Title}</h2>
-                                        <h1>{item.Category}</h1>
-                                        <h1 className="product-price"> ₹ {item.Price}/-</h1>
-                                        <button onClick={() => onAdd(item)} className="buy-button">Buy Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </>
-                    )
-                })
-            }
-        </div>
-    )
+  const [addedToCart, setAddedToCart] = useState({});
+
+  const handleAddToCart = (item) => {
+    onAdd(item);
+    setAddedToCart({ [item._id]: true });
+    setTimeout(() => setAddedToCart({}), 2000); // clear message after 2 seconds
+  };
+
+  return (
+    <div className='card-comp'>
+      {filterProduct.length
+        ? filterProduct.map((item) => {
+            return (
+              <>
+                <div className='flip-card' key={item._id}>
+                  <div className='flip-card-inner'>
+                    <div className='flip-card-front'>
+                      <img
+                        className='srcimg'
+                        src={`http://localhost:4000/uploads/${item.Image}`}
+                        alt='img'
+                      />
+                    </div>
+                    <div className='flip-card-back'>
+                      <h2>{item.Title}</h2>
+                      <h1>{item.Category}</h1>
+                      {item.subcategory && <h4>{item.subcategory}</h4>}
+                      <h1 className='product-price'> ₹ {item.Price}/-</h1>
+                      <button
+                        onClick={() => handleAddToCart(item)}
+                        className='buy-button'
+                      >
+                        Buy Now
+                      </button>
+                      {addedToCart[item._id] && (
+                        <p style={{ color: 'White' }}>Added to cart!</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })
+        : data.map((item) => {
+            return (
+              <>
+                <div className='flip-card' key={item._id}>
+                  <div className='flip-card-inner'>
+                    <div className='flip-card-front'>
+                      <img
+                        className='srcimg'
+                        src={`http://localhost:4000/uploads/${item.Image}`}
+                        alt='img'
+                      />
+                    </div>
+                    <div className='flip-card-back'>
+                      <h2>{item.Title}</h2>
+                      <h1>{item.Category}</h1>
+                      <h1 className='product-price'> ₹ {item.Price}/-</h1>
+                      <button
+                        onClick={() => handleAddToCart(item)}
+                        className='buy-button'
+                      >
+                        Buy Now
+                      </button>
+                      {addedToCart[item._id] && (
+                        <p style={{ color: 'white' }}>Added to cart!</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+    </div>
+  );
 }
 
 export default Card;

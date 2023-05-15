@@ -1,185 +1,93 @@
-import React from 'react'
-import AdminSidebar from '../../Admin/Dashboard/adminLeftBar/AdminSidebar'
-import './Dashboard.css'
+import React, { useState, useEffect } from 'react';
+import AdminSidebar from '../../Admin/Dashboard/adminLeftBar/AdminSidebar';
+import './Dashboard.css';
+
 const AdminDashboard = () => {
-    return (
-        <div>
-            <AdminSidebar />
-            <section class="home-section">
+  const [data, setData] = useState({});
 
-                <div class="home-content">
-                    <div class="overview-boxes">
-                        <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total Order</div>
-                                <div class="number">40,876</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                            < img className='bx bxs-cart-add cart two' src='./Images/order.png' alt='cart' />
-                        </div>
-                        <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total Sales</div>
-                                <div class="number">38,876</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                            < img className='bx bxs-cart-add cart two' src='./Images/cart.png' alt='cart' />
-                        </div>
-                        <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total Earning </div>
-                                <div class="number">₹12,876</div>
-                                <div class="indicator">
-                                    <i class='bx bx-up-arrow-alt'></i>
-                                    <span class="text">Up from yesterday</span>
-                                </div>
-                            </div>
-                            < img className='bx bxs-cart-add cart two' src='./Images/rupee.png' alt='cart' />
-                        </div>
-                        <div class="box">
-                            <div class="right-side">
-                                <div class="box-topic">Total View</div>
-                                <div class="number">11,086</div>
-                                <div class="indicator">
-                                    <i class='bx bx-down-arrow-alt down'></i>
-                                    <span class="text">Down From Today</span>
-                                </div>
-                            </div>
-                            < img className='bx bxs-cart-add cart two' src='./Images/view.png' alt='cart' />
-                        </div>
-                    </div>
-                    <div class="sales-boxes">
-                        <div class="recent-sales box">
-                            <div class="title">Recent Sales</div>
-                            <div class="sales-details">
-                                <ul class="details">
-                                    <li class="topic">Date</li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                    <li><a href="#">02 Jan 2021</a></li>
-                                </ul>
-                                <ul class="details">
-                                    <li class="topic">Customer</li>
-                                    <li><a href="#">Alex Doe</a></li>
-                                    <li><a href="#">David Mart</a></li>
-                                    <li><a href="#">Roe Parter</a></li>
-                                    <li><a href="#">Diana Penty</a></li>
-                                    <li><a href="#">Martin Paw</a></li>
-                                    <li><a href="#">Doe Alex</a></li>
-                                    <li><a href="#">Aiana Lexa</a></li>
-                                    <li><a href="#">Rexel Mags</a></li>
-                                    <li><a href="#">Tiana Loths</a></li>
-                                </ul>
-                                <ul class="details">
-                                    <li class="topic">Sales</li>
-                                    <li><a href="#">Delivered</a></li>
-                                    <li><a href="#">Pending</a></li>
-                                    <li><a href="#">Returned</a></li>
-                                    <li><a href="#">Delivered</a></li>
-                                    <li><a href="#">Pending</a></li>
-                                    <li><a href="#">Returned</a></li>
-                                    <li><a href="#">Delivered</a></li>
-                                    <li><a href="#">Pending</a></li>
-                                    <li><a href="#">Delivered</a></li>
-                                </ul>
-                                <ul class="details">
-                                    <li class="topic">Total</li>
-                                    <li><a href="#">₹204.98</a></li>
-                                    <li><a href="#">₹24.55</a></li>
-                                    <li><a href="#">₹25.88</a></li>
-                                    <li><a href="#">₹170.66</a></li>
-                                    <li><a href="#">₹56.56</a></li>
-                                    <li><a href="#">₹44.95</a></li>
-                                    <li><a href="#">₹67.33</a></li>
-                                    <li><a href="#">₹23.53</a></li>
-                                    <li><a href="#">₹46.52</a></li>
-                                </ul>
-                            </div>
-                            <div class="button">
-                                <a href="#">See All</a>
-                            </div>
-                        </div>
-                        <div class="top-sales box">
-                            <div class="title">Top Seling Product</div>
-                            <ul class="top-sales-details">
-                                <li>
-                                    <a href="#">
-                                        <img src="images/sunglasses.jpg" alt="" />
-                                        <span class="product">Vuitton Sunglasses</span>
-                                    </a>
-                                    <span class="price">₹1107</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="Images/user.jpg" alt="" />
-                                        <span class="product">Hourglass Jeans </span>
-                                    </a>
-                                    <span class="price">₹1567</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/nike.jpg" alt="" />
-                                        <span class="product">Nike Sport Shoe</span>
-                                    </a>
-                                    <span class="price">₹1234</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/scarves.jpg" alt="" />
-                                        <span class="product">Hermes Silk Scarves.</span>
-                                    </a>
-                                    <span class="price">₹2312</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/blueBag.jpg" alt="" />
-                                        <span class="product">Succi Ladies Bag</span>
-                                    </a>
-                                    <span class="price">₹1456</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/bag.jpg" alt="" />
-                                        <span class="product">Gucci Womens's Bags</span>
-                                    </a>
-                                    <span class="price">₹2345</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/addidas.jpg" alt="" />
-                                        <span class="product">Addidas Running Shoe</span>
-                                    </a>
-                                    <span class="price">₹2345</span>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="images/shirt.jpg" alt="" />
-                                        <span class="product">Bilack Wear's Shirt</span>
-                                    </a>
-                                    <span class="price">₹1245</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('https://example-api.com/data');
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <AdminSidebar />
+      <section className="home-section">
+        <div className="home-content">
+          <div className="overview-boxes">
+            <div className="box">
+              <div className="right-side">
+                <div className="box-topic">Total Order</div>
+                <div className="number">{data.totalOrders}</div>
+                <div className="indicator">
+                  <i className="bx bx-up-arrow-alt"></i>
+                  <span className="text">Up from yesterday</span>
                 </div>
-            </section>
-
-
-
+              </div>
+              <img className="bx bxs-cart-add cart two" src="./Images/order.png" alt="cart" />
+            </div>
+            <div className="box">
+              <div className="right-side">
+                <div className="box-topic">Total Sales</div>
+                <div className="number">{data.totalSales}</div>
+                <div className="indicator">
+                  <i className="bx bx-up-arrow-alt"></i>
+                  <span className="text">Up from yesterday</span>
+                </div>
+              </div>
+              <img className="bx bxs-cart-add cart two" src="./Images/cart.png" alt="cart" />
+            </div>
+            <div className="box">
+              <div className="right-side">
+                <div className="box-topic">Total Earning </div>
+                <div className="number">₹{data.totalEarning}</div>
+                <div className="indicator">
+                  <i className="bx bx-up-arrow-alt"></i>
+                  <span className="text">Up from yesterday</span>
+                </div>
+              </div>
+              <img className="bx bxs-cart-add cart two" src="./Images/rupee.png" alt="cart" />
+            </div>
+            <div className="box">
+              <div className="right-side">
+                <div className="box-topic">Total View</div>
+                <div className="number">{data.totalViews}</div>
+                <div className="indicator">
+                  <i className="bx bx-down-arrow-alt down"></i>
+                  <span className="text">Down From Today</span>
+                </div>
+              </div>
+              <img className="bx bxs-cart-add cart two" src="./Images/view.png" alt="cart" />
+            </div>
+          </div>
+          <div className="sales-boxes">
+            <div className="recent-sales box">
+              <div className="title">Recent Sales</div>
+              <div className="sales-details">
+                {data.recentSales?.map((sale) => (
+                  <div className="sale-item" key={sale.id}>
+                    <span className="sale-item-name">{sale.productName}</span>
+                    <span className="sale-item-amount">{sale.amount}</span>
+                    <span className="sale-item-date">{sale.date}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-    )
-}
+      </section>
+    </div>
+  );
+};
 
-export default AdminDashboard
+export default AdminDashboard;

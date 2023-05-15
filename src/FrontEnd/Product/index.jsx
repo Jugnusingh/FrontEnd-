@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Card from '../Card'
 import './Product.css'
 
-const Product = ({ productData, onAdd, cartMessage, categories }) => {
+const Product = ({ productData, onAdd, categories }) => {
   const [filterProduct, setfilterProduct] = useState([])
   const searchProduct = (item) => {
     const result = productData.filter((x) => x.Category === item);
@@ -10,9 +10,7 @@ const Product = ({ productData, onAdd, cartMessage, categories }) => {
   }
   return (
     <div>
-      <div className='cart-message'>
-        {cartMessage}
-      </div>
+      
       <div className='card-body'>
         <div className='card-left-body'>
           <h2>Assignment</h2>
@@ -20,10 +18,10 @@ const Product = ({ productData, onAdd, cartMessage, categories }) => {
             categories.map((item) => {
               // <button>{item.category}</button>
               return (
+                <div>
                 <button className='btn-mca' onClick={() => { searchProduct(item.category) }}>{item.category}</button>
+                </div>
               )
-
-
             })
           }
 
@@ -32,7 +30,7 @@ const Product = ({ productData, onAdd, cartMessage, categories }) => {
 
         <div className='card-right-parent'>
           <div className='card-right-body'>
-            <Card data={productData} onAdd={onAdd} filterProduct={filterProduct} cartMessage={cartMessage} />
+            <Card data={productData} onAdd={onAdd} filterProduct={filterProduct}  />
           </div>
         </div>
       </div>
