@@ -1,8 +1,6 @@
-
 import React, { useState } from 'react';
-import AdminSidebar from '../../Admin/Dashboard/adminLeftBar/AdminSidebar'
-import Upload from './Upload'
-import "./UploadProduct.css"
+import "./index.css"
+import AdminPanel from '../AdminPanel';
 
 const UploadProduct = ({categories}) => {
     const [Title, setTitle] = useState("");
@@ -39,8 +37,7 @@ const UploadProduct = ({categories}) => {
     
     return (
         <div >
-            <AdminSidebar />
-            <Upload />
+        <AdminPanel/>
             <div className="upload_container">
                 <center><h1> Product Upload</h1></center>
                 <form onSubmit={submitHandler} >

@@ -13,7 +13,7 @@ const Navbar = ({ countCartItems }) => {
         <div className='nav'>
           <SearchBar/>
           <NavLink className='nav1' to="/">Home</NavLink>
-          <NavLink className='nav1' to="/Assignments">Blogs</NavLink>
+          <NavLink className='nav1' to="/Blogs">Blogs</NavLink>
           <NavLink className='nav1' to="/Project">Shop</NavLink>
           <NavLink className='nav1' to="/Contact">Contact Us</NavLink>
           <NavLink className='cart-icon' to="/Cart"><img src='./Images/cart.png' alt='cart' /> <p>{countCartItems ? countCartItems : ""}</p></NavLink>

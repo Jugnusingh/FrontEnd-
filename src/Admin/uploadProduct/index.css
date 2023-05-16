@@ -77,7 +77,7 @@ justify-content: center;
    display: block;
    background: #FFF;
    padding: 10px 50px 50px;
-   
+   margin-top: 50px;
    height: inherit;
    border-radius: 15px;
 }

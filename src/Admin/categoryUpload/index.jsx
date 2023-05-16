@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './CategoryForm.css';
-import AdminSidebar from '../Dashboard/adminLeftBar/AdminSidebar';
-import Upload from './Upload';
+import './index.css';
+import AdminNavbar from '../adminNavbar';
+
 
 const CategoryForm = ({ categories }) => {
   // const [categories, setCategories] = useState([]);
@@ -54,8 +54,7 @@ const CategoryForm = ({ categories }) => {
 
   return (
     <div>
-      <AdminSidebar />
-      <Upload />
+      <AdminNavbar/>
       <div className="container11">
         <h2 className='heading'> Add New Category</h2>
         <form className='categoryFrom' onSubmit={handleSubmit}>

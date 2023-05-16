@@ -5,18 +5,15 @@ import Home from './FrontEnd/Home';
 import Contact from './FrontEnd/Contact';
 import Cart from './FrontEnd/Cart';
 import Login from './FrontEnd/login';
-import Dashboard from './Admin/Dashboard/Dashboard';
-import Order from './Admin/Order/Order';
-import Upload from './Admin/Upload/Upload';
-import Stock from './Admin/Stock/Stock';
-import UploadProduct from './Admin/Upload/UploadProduct';
-import UploadBlogs from './Admin/Upload/UploadBlogs';
 import axios from 'axios';
 import Blogs from './FrontEnd/Blogs';
 import Product from './FrontEnd/Product';
-import CategoryForm from './Admin/Upload/CategoryForm';
-import Signup from './Admin/Register';
 import "./index.css";
+import AdminPanel from './Admin/AdminPanel';
+import BlogUpload from './Admin/BlogsUpload';
+import OrderManagement from './Admin/OrderManagement';
+import UploadProduct from './Admin/uploadProduct';
+import CategoryForm from './Admin/categoryUpload';
 
 function SearchBar() {
   const [isActive, setIsActive] = useState(false);
@@ -113,20 +110,16 @@ function App() {
       <Navbar countCartItems={countCartItems} />
       <Routes>
         <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
-        <Route exact path='/Assignments' element={<Blogs />} />
+        <Route exact path='/Blogs' element={<Blogs />} />
         <Route exact path='/Contact' element={<Contact />} />
         <Route exact path="/cart" element={<Cart cartItems={cartItems} data={productData} onRemove={onRemove} countCartItems={countCartItems} />} />
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
-        <Route exact path="/Dashboard" element={<Dashboard />} />
-        <Route exact path="/All_Order" element={<Order />} />
-        <Route exact path="/Upload" element={<Upload />} />
-        <Route exact path="/Stock" element={<Stock />} />
-        <Route exact path="/UploadProduct" element={<UploadProduct categories={categories}/>} />
-        <Route exact path="/UploadBlogs" element={<UploadBlogs />} />
-        <Route exact path="/Register" element={<Signup />} />
-        <Route exact path="/CategoryForm" element={<CategoryForm categories={categories}/>} />
-
+        <Route exact path="/adminPanel" element={<AdminPanel/>} />
+        <Route exact path="/BlogUpload" element={<BlogUpload/>} />
+        <Route exact path="/ProductUpload" element={<UploadProduct categories={categories}/>} />
+        <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories}/>} />
+        <Route exact path="/Order" element={<OrderManagement/>} />
       </Routes>
 
     </div>

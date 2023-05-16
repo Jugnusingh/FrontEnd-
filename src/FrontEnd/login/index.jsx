@@ -27,7 +27,7 @@ const Login = () => {
       console.log(response,"hhhhhhhhh");
       if (response.status === 201) {
         setMessage("Login successful!");
-        navigate('/Dashboard');
+        navigate('/AdminPanel');
       } else {
         // console.log("action perfomed")
         setMessage(response.data.message);
