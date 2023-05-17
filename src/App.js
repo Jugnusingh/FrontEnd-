@@ -121,7 +121,6 @@ function App() {
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories}/>} />
         <Route exact path="/Order" element={<OrderManagement/>} />
       </Routes>
-
     </div>
   );
 }

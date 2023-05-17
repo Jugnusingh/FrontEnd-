@@ -1,38 +1,45 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
-  const [message, setMessage] = useState("");
-  const navigate = useNavigate()
- 
+  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+  console.log(message,"message")
   const [inputValue, setInputValue] = useState({
-    username: "",
-    email:"",
-    password: ""
-  })
- 
+    username: '',
+    email: '',
+    password: '',
+  });
+
   const handleValue = (e) => {
-    const value = e.target.value
-    const name = e.target.name
+    const value = e.target.value;
+    const name = e.target.name;
     setInputValue({
-      ...inputValue, [name]: value
-    })
-  }
+      ...inputValue,
+      [name]: value,
+    });
+  };
 
   const handleLoginForm = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/admin/signin",inputValue);
-      console.log(response,"hhhhhhhhh");
-      if (response.status === 201) {
-        setMessage("Login successful!");
+      const response = await axios.post(
+        'http://localhost:4000/admin/signin',
+        inputValue
+      );
+      
+      console.log(response, 'hhhhhhhhh');
+      localStorage.setItem("token",response.data.token)
+      if (response.status === 200) {
+        console.log("1234567890")
+        setMessage('Login successful!');
         navigate('/AdminPanel');
       } else {
-        // console.log("action perfomed")
-        setMessage(response.data.message);
+        setMessage("response");
       }
     } catch (error) {
+      setMessage('Invalid credentials. Please try again.');
       console.log(error);
     }
   };
@@ -45,16 +52,31 @@ const Login = () => {
           <h2 className="title">Sign in</h2>
           <div className="input-field">
             <i className="fas fa-user"></i>
-            <input type="text" placeholder="Username" name="username" onChange={handleValue} />
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleValue}
+            />
           </div>
           <div className="input-field">
             <i className="fas fa-user"></i>
-            <input type="text" placeholder="email" name="email" onChange={handleValue} />
+            <input
+              type="text"
+              placeholder="email"
+              name="email"
+              onChange={handleValue}
+            />
           </div>
           <div className="input-field">
             <i className="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="password" onChange={handleValue} />
-          </div> 
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleValue}
+            />
+          </div>
           <button className="btn solid">Login</button>
         </form>
         <div>{message}</div>
@@ -65,7 +87,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
