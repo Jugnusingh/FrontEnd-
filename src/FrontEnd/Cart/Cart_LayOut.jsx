@@ -71,7 +71,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, onAdd }) => {
             Subtotal <span>{countCartItems} items</span>
           </h1>
           <p>
-            <span>{totalAmount}</span>
+            <span>₹ {totalAmount}</span>
           </p>
           <button className='btn' onClick={handlePayNow}>
             Proceed to Buy

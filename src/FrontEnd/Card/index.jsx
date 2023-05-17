@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../Card/Card.css';
+import './Card.css';
 import { MdHelpOutline } from 'react-icons/md';
 
 function Card({ onAdd, data, filterProduct }) {
@@ -27,15 +27,15 @@ function Card({ onAdd, data, filterProduct }) {
                       />
                     </div>
                     <div className='flip-card-back'>
-                      <h2>{item.Title}</h2>
-                      <h1>{item.Category}</h1>
-                      {item.subcategory && <h4>{item.subcategory}</h4>}
-                      <h1 className='product-price'> ₹ {item.Price}/-</h1>
+                      <h3>{item.Title}</h3>
+                      <h2>{item.Category}</h2>
+                      {item.subcategory && <h5>{item.subcategory}</h5>}
+                      <h2 className='product-price'> ₹ {item.Price}/-</h2>
                       <button
                         onClick={() => handleAddToCart(item)}
                         className='buy-button'
                       >
-                        Buy Now
+                        Add To Cart
                       </button>
                       {addedToCart[item._id] && (
                         <p style={{ color: 'White' }}>Added to cart!</p>
@@ -59,14 +59,14 @@ function Card({ onAdd, data, filterProduct }) {
                       />
                     </div>
                     <div className='flip-card-back'>
-                      <h2>{item.Title}</h2>
-                      <h1>{item.Category}</h1>
+                      <h3>{item.Title}</h3>
+                      <h2>{item.Category}</h2>
                       <h1 className='product-price'> ₹ {item.Price}/-</h1>
                       <button
                         onClick={() => handleAddToCart(item)}
                         className='buy-button'
                       >
-                        Buy Now
+                        Add To Cart
                       </button>
                       {addedToCart[item._id] && (
                         <p style={{ color: 'white' }}>Added to cart!</p>

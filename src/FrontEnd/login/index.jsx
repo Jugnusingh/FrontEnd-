@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "./index.css"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,6 +12,17 @@ const Login = () => {
     email: '',
     password: '',
   });
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage('');
+      }, 5000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [message]);
 
   const handleValue = (e) => {
     const value = e.target.value;
@@ -78,8 +90,9 @@ const Login = () => {
             />
           </div>
           <button className="btn solid">Login</button>
+          <div className="Login-Response">{message}</div>
         </form>
-        <div>{message}</div>
+        
       </div>
       <div className="panels-container">
         <div className="panel left-panel">
