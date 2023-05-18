@@ -56,7 +56,7 @@ const AdminNavbar = () => {
         <div className='nav'>
           <NavLink className='nav1' to="/Order" onClick={handleActivity}>Order Management</NavLink>
           <NavLink className='nav1' to="/BlogUpload" onClick={handleActivity}>BlogUpload</NavLink>
-          <NavLink className='nav1' to="/ProductUpload" onClick={handleActivity}>ProductUpload</NavLink>
+          <NavLink className='nav1' to="/UploadManagement" onClick={handleActivity}>UploadManagement</NavLink>
           <NavLink className='nav1' to="/CategoryUpload" onClick={handleActivity}>CategoryUpload</NavLink>
           <button className="logout-button" onClick={logoutUser}>Logout</button>
         </div>

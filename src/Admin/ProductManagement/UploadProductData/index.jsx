@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import "./index.css"
-import AdminPanel from '../AdminPanel';
+// import "./index.css"
 
-const UploadProduct = ({categories}) => {
+
+const UploadProduct = ({ categories }) => {
     const [Title, setTitle] = useState("");
     const [Description, setDescription] = useState("")
     const [Category, setCategory] = useState(categories);
@@ -34,10 +34,10 @@ const UploadProduct = ({categories}) => {
             console.error('Error adding product:', response.statusText);
         }
     }
-    
+
     return (
         <div >
-        <AdminPanel/>
+
             <div className="upload_container">
                 <center><h1> Product Upload</h1></center>
                 <form onSubmit={submitHandler} >
@@ -60,15 +60,25 @@ const UploadProduct = ({categories}) => {
                                 <span className="highlight"></span>
                                 <span className="bar"></span>
                             </div>
-                            <div className="select">
+                            {/* <div className="select">
                                 <select>
                                 <option value="Select" >Your Category</option>
                                     {
-                                        Category.map((item)=>{
+                                        categories.map((item)=>{
                                             return <option>{item.category}</option>
                                         })
                                     }
                                     </select>
+                            </div> */}
+                            <div className="select">
+                                <select value={Category} onChange={(e) => setCategory(e.target.value)}>
+                                    <option value="Select">Your Category</option>
+                                    {categories.map((item) => (
+                                        <option key={item._id} value={item.category}>
+                                            {item.category}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
                         <div className='upload-div'>
@@ -93,6 +103,6 @@ const UploadProduct = ({categories}) => {
             </div>
         </div>
     )
-    }
+}
 
 export default UploadProduct

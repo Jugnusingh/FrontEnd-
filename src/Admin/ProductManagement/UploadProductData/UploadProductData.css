@@ -17,6 +17,7 @@ select {
    max-width: 300px;
 }
 
+
 select::-ms-expand {
    display: none;
 }
@@ -72,8 +73,10 @@ justify-content: center;
 
 .upload_container {
    font-family: 'Roboto';
-   width: 1075px;
-   margin-left: 250px;
+    margin: 20px auto;
+   max-width: 600px;
+   width: fit-content;
+   margin-left: 25px;
    display: block;
    background: #FFF;
    padding: 10px 50px 50px;
@@ -81,6 +84,7 @@ justify-content: center;
    height: inherit;
    border-radius: 15px;
 }
+
 .dv-fm{
 display: flex;
 justify-content: center;

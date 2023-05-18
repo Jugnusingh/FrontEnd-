@@ -9,11 +9,11 @@ import axios from 'axios';
 import Blogs from './FrontEnd/Blogs';
 import Product from './FrontEnd/Product';
 import "./index.css";
-import AdminPanel from './Admin/AdminPanel';
 import BlogUpload from './Admin/BlogsUpload';
 import OrderManagement from './Admin/OrderManagement';
-import UploadProduct from './Admin/uploadProduct';
 import CategoryForm from './Admin/categoryUpload';
+import UploadManagement from './Admin/ProductManagement/UploadManagement';
+import AdminPanel from './Admin/AdminPanel/AdminPanel';
 
 function SearchBar() {
   const [isActive, setIsActive] = useState(false);
@@ -49,6 +49,9 @@ function App() {
   const [cartMessage, setCartMessage] = useState()
   const [productData, setProductData] = useState([])
   const [imageData, setImageData] = useState([])
+  
+
+ 
 
   const getSliderData = () => {
     axios.get("http://localhost:4000/image")
@@ -107,6 +110,7 @@ function App() {
   };
   return (
     <div>
+     
       <Navbar countCartItems={countCartItems} />
       <Routes>
         <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
@@ -115,10 +119,10 @@ function App() {
         <Route exact path="/cart" element={<Cart cartItems={cartItems} data={productData} onRemove={onRemove} countCartItems={countCartItems} />} />
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
-        <Route exact path="/adminPanel" element={<AdminPanel/>} />
+        <Route exact path="/adminPanel" element={<AdminPanel />} />
         <Route exact path="/BlogUpload" element={<BlogUpload/>} />
-        <Route exact path="/ProductUpload" element={<UploadProduct categories={categories}/>} />
-        <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories}/>} />
+        <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories}/>} />
+        <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement/>} />
       </Routes>
     </div>

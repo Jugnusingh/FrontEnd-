@@ -64,8 +64,6 @@ const CategoryForm = ({ categories }) => {
             <span className="bar"></span>
             <label className='labl'>Category</label>
           </div>
-
-
           <button className='bton' type="submit">{editing ? 'Update' : 'Submit'}</button>
         </form>
         <table>

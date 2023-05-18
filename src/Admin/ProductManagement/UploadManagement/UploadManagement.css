@@ -1,0 +1,20 @@
+.upload-management-container {
+    display: flex; 
+    justify-content: space-between;
+    background-color: aqua;
+    width: 1335px;
+    height: 630px;
+  }
+  
+  .update-list{
+height: fit-content;
+
+
+
+
+  }
+  @media screen and (max-width: 720px) {
+    .upload-management-container {
+      flex-direction: column;
+    }
+  }
