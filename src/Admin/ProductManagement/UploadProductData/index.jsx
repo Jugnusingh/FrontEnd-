@@ -37,7 +37,6 @@ const UploadProduct = ({ categories }) => {
 
     return (
         <div >
-
             <div className="upload_container">
                 <center><h1> Product Upload</h1></center>
                 <form onSubmit={submitHandler} >
@@ -60,16 +59,6 @@ const UploadProduct = ({ categories }) => {
                                 <span className="highlight"></span>
                                 <span className="bar"></span>
                             </div>
-                            {/* <div className="select">
-                                <select>
-                                <option value="Select" >Your Category</option>
-                                    {
-                                        categories.map((item)=>{
-                                            return <option>{item.category}</option>
-                                        })
-                                    }
-                                    </select>
-                            </div> */}
                             <div className="select">
                                 <select value={Category} onChange={(e) => setCategory(e.target.value)}>
                                     <option value="Select">Your Category</option>
