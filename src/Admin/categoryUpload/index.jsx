@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './index.css';
+import './CategoryForm.css';
 import AdminNavbar from '../adminNavbar';
 
 
 const CategoryForm = ({ categories }) => {
-  // const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState('');
   const [editing, setEditing] = useState(false);
   const [editingId, setEditingId] = useState('');

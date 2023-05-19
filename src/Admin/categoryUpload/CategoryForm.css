@@ -1,0 +1,95 @@
+.container11 {
+  margin-top: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.categoryForm {
+  margin-bottom: 20px;
+}
+
+.group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inp {
+  border: none;
+  border-bottom: 1px solid #333;
+  outline: none;
+  font-size: 16px;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.inp:focus + .highlight {
+  background-color: #1e90ff;
+}
+
+.bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #999;
+}
+
+.labl {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  font-size: 16px;
+  color: #999;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.inp:focus ~ .labl,
+.inp:valid ~ .labl {
+  font-size: 12px;
+  top: -15px;
+  color: #1e90ff;
+}
+
+.bton {
+  background-color: #1e90ff;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}

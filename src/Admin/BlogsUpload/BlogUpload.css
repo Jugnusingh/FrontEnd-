@@ -1,0 +1,59 @@
+/* Blog.css */
+
+.blog {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.blog h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.blog img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+/* AdminPanel.css */
+
+.admin-panel {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.admin-panel h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.blog-list {
+  margin-top: 20px;
+}
+
+.blog-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.blog-actions {
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+  border: none;
+  background: #ccc;
+  color: #fff;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background: #999;
+}

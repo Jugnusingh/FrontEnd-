@@ -51,8 +51,6 @@ function App() {
   const [imageData, setImageData] = useState([])
   
 
- 
-
   const getSliderData = () => {
     axios.get("http://localhost:4000/image")
       .then((result) => {
@@ -62,7 +60,6 @@ function App() {
         console.log(error, "slider Error")
       })
   }
-
   useEffect(() => {
     getSliderData()
     getCategories()
@@ -73,7 +70,6 @@ function App() {
     setCartItems((cartItems.filter((x) => x._id !== curElemt._id)))
     setCountCartItems(countCartItems - curElemt.qty)
   }
-
   const onAdd = (item) => {
     console.log(item, "item")
     const itemExist = cartItems.find((x) => x._id === item._id)
@@ -86,7 +82,6 @@ function App() {
     setCountCartItems(countCartItems + 1)
     setCartMessage("added to cart")
   }
-
   const getProductData = () => {
     axios.get("http://localhost:4000/product")
       .then((result) => {
