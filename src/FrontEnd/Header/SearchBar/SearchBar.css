@@ -1,0 +1,56 @@
+/* Search Bar CSS */
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+}
+
+.search-bar:hover {
+  width: 500px;
+}
+
+.search-bar input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.search-bar button {
+  width: 40px;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.search-bar input:focus {
+  width: 100%;
+}
+
+.search-bar button:hover {
+  background-color: #e8e8e8;
+}
+
+.search-bar input::placeholder {
+  color: #888888;
+}
+
+@media screen and (max-width: 620px) {
+  .searchBox:hover {
+    width: 150px;
+  }
+}

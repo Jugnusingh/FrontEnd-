@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import "./index.css"
+import "./UploadProductData.css"
 
 
 const UploadProduct = ({ categories }) => {
@@ -36,8 +37,9 @@ const UploadProduct = ({ categories }) => {
     }
 
     return (
-        <div >
-            <div className="upload_container">
+        <div className='mainvalue' >
+           
+            <div className="upload_container ">
                 <center><h1> Product Upload</h1></center>
                 <form onSubmit={submitHandler} >
                     <div className='dv-fm'>
@@ -91,6 +93,7 @@ const UploadProduct = ({ categories }) => {
                 </form>
             </div>
         </div>
+        
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import SearchBar from '../SearchBar'
+// import SearchBar from '../SearchBar'
 import "./Navbar.css"
 
 const Navbar = ({ countCartItems }) => {
@@ -11,7 +11,7 @@ const Navbar = ({ countCartItems }) => {
       <nav className="navbar">
         <NavLink className="logo" to='/'> DalalTechnologies</NavLink>
         <div className='nav'>
-          <SearchBar/>
+          {/* <SearchBar/> */}
           <NavLink className='nav1' to="/">Home</NavLink>
           <NavLink className='nav1' to="/Blogs">Blogs</NavLink>
           <NavLink className='nav1' to="/Project">Shop</NavLink>

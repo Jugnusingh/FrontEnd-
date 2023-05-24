@@ -1,41 +1,31 @@
 import React, { useState } from 'react';
-import "./index.css"
+import './SearchBar.css'
 
-const SearchBar = ({ productData, onSearch }) => {
-  const [isActive, setIsActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+const SearchBar = () => {
+  const [searchText, setSearchText] = useState('');
 
-  const handleFocus = () => {
-    setIsActive(true);
-  };
-
-  const handleBlur = () => {
-    setIsActive(false);
+  const handleInputChange = (event) => {
+    setSearchText(event.target.value);
   };
 
   const handleSearch = () => {
-    onSearch(searchQuery);
-  }
-
-  const handleInputChange = (event) => {
-    setSearchQuery(event.target.value);
-  }
+    // Perform search logic here
+    console.log('Searching for:', searchText);
+  };
 
   return (
-    <div className={`search-bar${isActive ? ' active' : ''}`}>
+    <div className="search-bar">
       <input
         type="text"
         placeholder="Search"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        value={searchText}
         onChange={handleInputChange}
-        value={searchQuery}
       />
-      <button type="submit" onClick={handleSearch}>
-        <i className="fa fa-search"></i>
-      </button>
+      <button onClick={handleSearch}> <i className="material-icons">
+        </i></button>
+    
     </div>
   );
-}
+};
 
 export default SearchBar;

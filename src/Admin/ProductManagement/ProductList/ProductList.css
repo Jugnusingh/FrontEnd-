@@ -1,73 +1,57 @@
-.product-list-container {
-  margin-top: 20px;
-  width: auto;
+/* Animation for table rows */
+@keyframes rowAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* Styles for the product list container */
+.product-list-container {
+  margin-top: 20px;
+}
+
+/* Styles for the table */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-table th,
-table td {
+/* Styles for the table header */
+thead th {
   padding: 10px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
   text-align: left;
+}
+
+/* Styles for the table body */
+tbody td {
+  padding: 10px;
   border: 1px solid #ccc;
 }
 
-table th {
-  background-color: #008CBA;
-  color: white;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:hover {
-  background-color: #ddd;
-}
-
-table td button {
-  margin-right: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-  border: none;
+/* Styles for the delete button */
+button {
   padding: 5px 10px;
+  font-size: 14px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
   cursor: pointer;
+  /* transition: background-color 0.3s; */
 }
 
-table td button:hover {
-  background-color: #2E8B57;
+button:hover {
+  background-color: #c82333;
 }
 
-table td button:last-child {
-  background-color: #f44336;
-}
-
-table td button:last-child:hover {
-  background-color: #d32f2f;
-}
-
-@media screen and (max-width: 600px) {
-  table {
-    display: block;
-    border: none;
-  }
-
-  table th,
-  table td {
-    display: block;
-    border: none;
-    padding: 0;
-  }
-
-  table th {
-    margin-top: 10px;
-  }
-
-  table td {
-    margin-top: 10px;
-  }
+/* Animation styles */
+tbody tr {
+  animation: rowAnimation 0.5s ;
+  opacity: 10;
 }
