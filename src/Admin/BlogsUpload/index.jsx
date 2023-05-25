@@ -3,25 +3,26 @@ import axios from "axios";
 import "./BlogUpload.css";
 import AdminNavbar from "../adminNavbar";
 
-const BlogUpload = () => {
-    const [Blogs, setBlogs] = useState([]);
+const BlogUpload = ({blogsData}) => {
+    console.log(blogsData,"myBlogsssss")
+    // const [Blogs, setBlogs] = useState([]);
     const [Title, setTitle] = useState("");
     const [Content, setContent] = useState("");
     const [Image, setImage] = useState(null);
     const [selectedBlog, setSelectedBlog] = useState(null);
 
-    useEffect(() => {
-        fetchBlogs();
-    }, []);
+    // useEffect(() => {
+    //     fetchBlogs();
+    // }, []);
 
-    const fetchBlogs = async () => {
-        try {
-            const response = await axios.get("http://127.0.0.1:4000/Blog");
-            setBlogs(response.data);
-        } catch (error) {
-            console.error("Error fetching Blogs:", error);
-        }
-    };
+    // const fetchBlogs = async () => {
+    //     try {
+    //         const response = await axios.get("http://127.0.0.1:4000/Blog");
+    //         setBlogs(response.data);
+    //     } catch (error) {
+    //         console.error("Error fetching Blogs:", error);
+    //     }
+    // };
 
     const handleFileChange = (event) => {
         setImage(event.target.files[0]);
@@ -43,7 +44,7 @@ const BlogUpload = () => {
                 await axios.post("http://127.0.0.1:4000/Blog", formData);
             }
 
-            fetchBlogs();
+            // fetchBlogs();
             resetForm();
         } catch (error) {
             console.error("Error submitting blog:", error);
@@ -59,7 +60,7 @@ const BlogUpload = () => {
     const handleBlogDelete = async (blog) => {
         try {
             await axios.delete(`http://127.0.0.1:4000/Blog/${blog._id}`);
-            fetchBlogs();
+            // fetchBlogs();
         } catch (error) {
             console.error("Error deleting blog:", error);
         }
@@ -95,7 +96,7 @@ const BlogUpload = () => {
 
             {/* Blog list */}
             <div className="blog-list">
-                {Blogs.map((blog) => (
+                {blogsData.map((blog) => (
                     <div className="blog-item" key={blog._id}>
                         <div>
                             <h3>Title: {blog.Title}</h3>

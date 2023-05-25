@@ -28,12 +28,12 @@ const UploadProduct = ({ categories }) => {
                 body: formData,
             });
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log('Product added successfully:', data);
-        } else {
-            console.error('Error adding product:', response.statusText);
-        }
+        // if (response.ok) {
+        //     const data = await response.json();
+        //     console.log('Product added successfully:', data);
+        // } else {
+        //     console.error('Error adding product:', response.statusText);
+        // }
     }
 
     return (
