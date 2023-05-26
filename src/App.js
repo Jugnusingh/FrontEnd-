@@ -6,6 +6,7 @@ import Contact from './FrontEnd/Contact';
 import Cart from './FrontEnd/Cart';
 import Login from './FrontEnd/login';
 import axios from 'axios';
+import Blogs from './FrontEnd/Blogs';
 import Product from './FrontEnd/Product';
 import "./index.css";
 import BlogUpload from './Admin/BlogsUpload';
@@ -13,7 +14,6 @@ import OrderManagement from './Admin/OrderManagement';
 import CategoryForm from './Admin/categoryUpload';
 import UploadManagement from './Admin/ProductManagement/UploadManagement';
 import AdminPanel from './Admin/AdminPanel/AdminPanel';
-import Blog from './FrontEnd/Blogs';
 
 function SearchBar() {
   const [isActive, setIsActive] = useState(false);
@@ -49,7 +49,6 @@ function App() {
   const [cartMessage, setCartMessage] = useState()
   const [productData, setProductData] = useState([])
   const [imageData, setImageData] = useState([])
-  const [Blogs, setBlogs] = useState([]);
   
 
   const getSliderData = () => {
@@ -64,9 +63,8 @@ function App() {
   useEffect(() => {
     getSliderData()
     getCategories()
-    fetchBlogs()
     // localStorage.setItem("localProductData", JSON.stringify(imageData))
-  }, [categories],[Blogs])
+  }, [])
 
   const onRemove = (curElemt) => {
     setCartItems((cartItems.filter((x) => x._id !== curElemt._id)))
@@ -95,7 +93,7 @@ function App() {
   useEffect(() => {
     getProductData()
     localStorage.setItem("localProductData", JSON.stringify(productData))
-  }, [productData])
+  }, [])
 
   const getCategories = async () => {
     try {
@@ -105,27 +103,19 @@ function App() {
       console.log(error);
     }
   };
-  const fetchBlogs = async () => {
-    try {
-        const response = await axios.get("http://127.0.0.1:4000/Blog");
-        setBlogs(response.data);
-    } catch (error) {
-        console.error("Error fetching Blogs:", error);
-    }
-};
   return (
     <div>
      
       <Navbar countCartItems={countCartItems} />
       <Routes>
         <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
-        <Route exact path='/Blogs' element={<Blog blogsData={Blogs} />} />
+        <Route exact path='/Blogs' element={<Blogs />} />
         <Route exact path='/Contact' element={<Contact />} />
         <Route exact path="/cart" element={<Cart cartItems={cartItems} data={productData} onRemove={onRemove} countCartItems={countCartItems} />} />
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/adminPanel" element={<AdminPanel />} />
-        <Route exact path="/BlogUpload" element={<BlogUpload  blogsData={Blogs}   />} />
+        <Route exact path="/BlogUpload" element={<BlogUpload/>} />
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories}/>} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement/>} />
