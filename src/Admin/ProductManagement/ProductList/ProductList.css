@@ -10,48 +10,38 @@
   }
 }
 
-/* Styles for the product list container */
 .product-list-container {
-  margin-top: 20px;
+  margin: 20px;
+  width: 560px;
 }
 
-/* Styles for the table */
+.search-bar {
+  margin-bottom: 10px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Styles for the table header */
-thead th {
+th, td {
   padding: 10px;
-  background-color: #f3f3f3;
-  border: 1px solid #ccc;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Styles for the table body */
-tbody td {
-  padding: 10px;
-  border: 1px solid #ccc;
+th {
+  background-color: #f2f2f2;
 }
 
-/* Styles for the delete button */
 button {
   padding: 5px 10px;
-  font-size: 14px;
   background-color: #dc3545;
   color: #fff;
   border: none;
   cursor: pointer;
-  /* transition: background-color 0.3s; */
 }
 
 button:hover {
   background-color: #c82333;
-}
-
-/* Animation styles */
-tbody tr {
-  animation: rowAnimation 0.5s ;
-  opacity: 10;
 }

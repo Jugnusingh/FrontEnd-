@@ -3,12 +3,24 @@ import axios from 'axios';
 import './CategoryForm.css';
 import AdminNavbar from '../adminNavbar';
 
-
-const CategoryForm = ({ categories }) => {
+const CategoryForm = () => {
+  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState('');
   const [editing, setEditing] = useState(false);
   const [editingId, setEditingId] = useState('');
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:4000/categories');
+      setCategories(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,7 +35,7 @@ const CategoryForm = ({ categories }) => {
         console.log(response);
       }
       setCategory('');
-      // getCategories();
+      fetchCategories(); // Fetch the updated categories
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +45,7 @@ const CategoryForm = ({ categories }) => {
     try {
       const response = await axios.delete(`http://127.0.0.1:4000/categories/${id}`);
       console.log(response);
-      // getCategories();
+      fetchCategories(); // Fetch the updated categories
     } catch (error) {
       console.log(error);
     }

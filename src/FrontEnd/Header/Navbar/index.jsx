@@ -5,7 +5,6 @@ import "./Navbar.css"
 
 const Navbar = ({ countCartItems }) => {
   return (
-
     <div>
       <div className="grad-bar"></div>
       <nav className="navbar">
@@ -20,7 +19,6 @@ const Navbar = ({ countCartItems }) => {
         </div>
       </nav>
     </div>
-
   )
 }
 
