@@ -8,6 +8,7 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState(null);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [expandedBlogs, setExpandedBlogs] = useState([]);
 
   const handleFileChange = (event) => {
     setImage(event.target.files[0]);
@@ -53,6 +54,16 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
     }
   };
 
+  const handleExpandBlog = (blogId) => {
+    setExpandedBlogs((prevExpandedBlogs) => [...prevExpandedBlogs, blogId]);
+  };
+
+  const handleCollapseBlog = (blogId) => {
+    setExpandedBlogs((prevExpandedBlogs) =>
+      prevExpandedBlogs.filter((id) => id !== blogId)
+    );
+  };
+
   const resetForm = () => {
     setSelectedBlog(null);
     setTitle("");
@@ -63,7 +74,7 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
   return (
     <div>
       <AdminNavbar />
-      <div className="blogUpload">
+      <div className="blog-upload">
         <h2>Blog Upload</h2>
         <form onSubmit={handleBlogSubmit}>
           <input
@@ -71,39 +82,80 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
             placeholder="Title"
             value={Title}
             onChange={(e) => setTitle(e.target.value)}
+            className="blog-input"
             required
           />
           <textarea
             placeholder="Content"
             value={Content}
             onChange={(e) => setContent(e.target.value)}
+            className="blog-input"
             required
           />
-          <input type="file" onChange={handleFileChange} required />
-          <button type="submit">{selectedBlog ? "Update Blog" : "Add Blog"}</button>
-          <button type="button" onClick={resetForm}>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="file-input"
+            required
+          />
+          <button type="submit" className="submit-btn">
+            {selectedBlog ? "Update Blog" : "Add Blog"}
+          </button>
+          <button type="button" onClick={resetForm} className="cancel-btn">
             Cancel
           </button>
         </form>
         <div className="blog-list">
           <h2>Existing Blogs</h2>
-          {blogsData.map((blog) => (
-            <div className="blog-item" key={blog._id}>
-              <h3>Title: {blog.Title}</h3>
-              <p>Content: {blog.Content}</p>
-              <img
-                className='srcimg'
-                src={`http://localhost:4000/uploads/${blog.Image}`}
-                alt='img'
-              />
-              <button type="button" onClick={() => handleBlogEdit(blog)}>
-                Edit
-              </button>
-              <button type="button" onClick={() => handleBlogDelete(blog)}>
-                Delete
-              </button>
-            </div>
-          ))}
+          <div className="blog-items">
+            {blogsData.map((blog) => (
+              <div className="blog-item" key={blog._id}>
+                <img
+                  className="srcimg1"
+                  src={`http://localhost:4000/uploads/${blog.Image}`}
+                  alt="img"
+                />
+                <div className="blog-content">
+                  <h3>{blog.Title}</h3>
+                  {expandedBlogs.includes(blog._id) ? (
+                    <div>
+                      <p>{blog.Content}</p>
+                      <button
+                        className="show-less-btn"
+                        onClick={() => handleCollapseBlog(blog._id)}
+                      >
+                        Show Less
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <p>{blog.Content.slice(0, 100)}...</p>
+                      <button
+                        className="show-more-btn"
+                        onClick={() => handleExpandBlog(blog._id)}
+                      >
+                        Show More
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="blog-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleBlogEdit(blog)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleBlogDelete(blog)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

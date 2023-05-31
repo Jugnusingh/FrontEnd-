@@ -1,59 +1,92 @@
-/* Blog.css */
-
-.blog {
-  border: 1px solid #ccc;
+.blog-upload {
+  max-width: 1550px;
+  margin:  auto;
   padding: 20px;
+  background-color: aliceblue;
+}
+
+.blog-input {
+  width: 50%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.file-input {
   margin-bottom: 20px;
 }
 
-.blog h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
+.submit-btn,
+.cancel-btn {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
 
-.blog img {
-  max-width: 100%;
-  margin-bottom: 10px;
-}
-
-/* AdminPanel.css */
-
-.admin-panel {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.admin-panel h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
 }
 
 .blog-list {
-  margin-top: 20px;
+  margin-top: 10px;
+ 
+}
+
+.blog-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
 }
 
 .blog-item {
-  border: 1px solid #ccc;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
   margin-bottom: 20px;
+  animation: slideIn 1.5s ease-in;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.srcimg1 {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.blog-content {
+  flex: 2;
 }
 
 .blog-actions {
-  margin-top: 10px;
+  display: flex;
+  margin-left: auto;
 }
 
-.edit-button,
-.delete-button {
-  border: none;
-  background: #ccc;
-  color: #fff;
+.edit-btn,
+.delete-btn {
   padding: 5px 10px;
-  margin-right: 10px;
-  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 10px;
+  
 }
 
-.edit-button:hover,
-.delete-button:hover {
-  background: #999;
+.show-more-btn,
+.show-less-btn {
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .blog-item {
+    flex-basis: 100%;
+  }
 }
