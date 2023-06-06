@@ -43,7 +43,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container1">
       <div className="signin-signup">
         <form action="#" className="sign-in-form fm" onSubmit={handleLoginForm}>
           <h2 className="title">Contact Us</h2>

@@ -37,7 +37,7 @@ function App() {
     axios
       .get("http://localhost:4000/image")
       .then((result) => {
-        console.log(result.data.imageData, "imageData");
+        
         setImageData(result.data.imageData);
       })
       .catch(error => {
@@ -117,7 +117,7 @@ function App() {
     }
   };
 
-  console.log(blogs, "Blogs in App");
+ 
 
   return (
     <div>
@@ -134,6 +134,7 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement />} />
+       
       </Routes>
     </div>
   );

@@ -1,43 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Cart_LayOut.css';
 import { MdDelete } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import axios from 'axios';
 
-const Cart_LayOut = ({ data, onRemove, countCartItems, onAdd }) => {
+const Cart_LayOut = ({ data, onRemove, countCartItems }) => {
   const [showMessage, setShowMessage] = useState(false);
   const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
-  const handleAddToCart = (item) => {
-    setShowMessage(true);
-    onAdd(item);
-  };
+  const canvasRef = useRef(null);
 
-  const handlePayNow = () => {
+  useEffect(() => {
+    if (canvasRef.current) {
+      const context = canvasRef.current.getContext('2d');
+      context.willReadFrequently = true;
+    }
+  }, []);
+
+  const initPayment = async (data) => {
     const options = {
-      key: 'YOUR_PAYUMONEY_KEY',
-      amount: totalAmount * 100, // PayUMoney accepts amount in paisa, so multiply by 100
+      key: "rzp_test_LLTSrqLmpUtsIx",
+      amount: totalAmount * 100, // Convert to paise
       currency: 'INR',
-      name: 'DalalTechnologies',
-      description: 'Payment for items purchased on My Online  Assignment',
-      image: 'https://DalalTechnologies.com/logo.png',
-      order_id: 'UNIQUE_ORDER_ID',
-      callback_url: 'https://www.example.com/payumoney/success',
-      cancel_url: 'https://www.example.com/payumoney/cancel',
+      order_id: data.id, // Make sure data contains the correct id field
+      handler: async (response) => {
+        console.log(response, "yyy");
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
+        console.log(razorpay_signature, "razorpay_signature hai ");
+        try {
+          const verifyUrl = "http://localhost:4000/Pay/verify";
+          const verificationResponse = await axios.post(verifyUrl, {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+          });
+          console.log(verificationResponse.data);
+        } catch (error) {
+          console.log(error, "error occurred");
+        }
+      },
+      theme: {
+        "color": "#121212"
+    }
     };
-
-    const form = document.createElement('form');
-    form.setAttribute('action', 'https://sandboxsecure.payu.in/_payment');
-    form.setAttribute('method', 'POST');
-
-    Object.keys(options).forEach((key) => {
-      const input = document.createElement('input');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('name', key);
-      input.setAttribute('value', options[key]);
-      form.appendChild(input);
-    });
-
-    document.body.appendChild(form);
-    form.submit();
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+  
+  const handlePayNow = async () => {
+    try {
+      const orderUrl = "http://localhost:4000/Pay/orders";
+      const orderResponse = await axios.post(orderUrl, { amount: totalAmount });
+      console.log(orderResponse.data,"order mai kya aaya 43");
+      initPayment(orderResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -79,6 +96,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, onAdd }) => {
           {showMessage && <div>Added to Cart</div>}
         </div>
       </div>
+      <canvas ref={canvasRef} style={{ display: 'none' }} />
     </div>
   );
 };
