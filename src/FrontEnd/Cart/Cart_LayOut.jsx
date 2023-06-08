@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Cart_LayOut.css';
 import { MdDelete } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import axios from 'axios';
 
-const Cart_LayOut = ({ data, onRemove, countCartItems }) => {
+const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
+  console.log(data,"my pdf path ")
   const [showMessage, setShowMessage] = useState(false);
   const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
   const canvasRef = useRef(null);
-
+ 
   useEffect(() => {
     if (canvasRef.current) {
       const context = canvasRef.current.getContext('2d');
@@ -16,46 +16,21 @@ const Cart_LayOut = ({ data, onRemove, countCartItems }) => {
     }
   }, []);
 
-  const initPayment = async (data) => {
-    const options = {
-      key: "rzp_test_LLTSrqLmpUtsIx",
-      amount: totalAmount * 100, // Convert to paise
-      currency: 'INR',
-      order_id: data.id, // Make sure data contains the correct id field
-      handler: async (response) => {
-        console.log(response, "yyy");
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
-        console.log(razorpay_signature, "razorpay_signature hai ");
-        try {
-          const verifyUrl = "http://localhost:4000/Pay/verify";
-          const verificationResponse = await axios.post(verifyUrl, {
-            razorpay_order_id,
-            razorpay_payment_id,
-            razorpay_signature,
-          });
-          console.log(verificationResponse.data);
-        } catch (error) {
-          console.log(error, "error occurred");
-        }
-      },
-      theme: {
-        "color": "#121212"
-    }
-    };
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
+  const handleClickRemove = (item) => {
+    onRemove(item);
   };
-  
-  const handlePayNow = async () => {
-    try {
-      const orderUrl = "http://localhost:4000/Pay/orders";
-      const orderResponse = await axios.post(orderUrl, { amount: totalAmount });
-      console.log(orderResponse.data,"order mai kya aaya 43");
-      initPayment(orderResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+const handleClickPayNow = () => {
+  try {
+    const productIds = data.map((item) => item.id);
+    const quantities = data.map((item) => item.qty);
+    const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
+
+    handlePayNow(totalAmount, productIds, quantities);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div className='layout-div'>
@@ -76,7 +51,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems }) => {
                 <div className='amount-div'>
                   Total <span>{item.Price * item.qty}</span>
                 </div>
-                <div className='remove-div' onClick={() => onRemove(item)}>
+                <div className='remove-div' onClick={() => handleClickRemove(item)}>
                   <MdDelete />
                 </div>
               </div>
@@ -90,7 +65,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems }) => {
           <p>
             <span>₹ {totalAmount}</span>
           </p>
-          <button className='btn' onClick={handlePayNow}>
+          <button className='btn' onClick={handleClickPayNow}>
             Proceed to Buy
           </button>
           {showMessage && <div>Added to Cart</div>}

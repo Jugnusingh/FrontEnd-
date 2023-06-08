@@ -14,7 +14,7 @@ import CategoryForm from './Admin/categoryUpload';
 import UploadManagement from './Admin/ProductManagement/UploadManagement';
 import AdminPanel from './Admin/AdminPanel/AdminPanel';
 import Blog from './FrontEnd/Blogs';
-
+import DownloadPage from './DownloadPdf';
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -24,6 +24,9 @@ function App() {
   const [cartMessage, setCartMessage] = useState('');
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
+  const [purchasedProductId, setPurchasedProductId] = useState([]);
+  const [order, setOrder] = useState([]); // Add order state
+  console.log(order,"orderdata ")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +40,6 @@ function App() {
     axios
       .get("http://localhost:4000/image")
       .then((result) => {
-        
         setImageData(result.data.imageData);
       })
       .catch(error => {
@@ -45,19 +47,17 @@ function App() {
       });
   };
 
-  const onRemove = (curElement) => {
-    axios
-      .delete(`http://localhost:4000/product/${curElement._id}`)
-      .then(() => {
-        setCartItems(cartItems.filter((x) => x._id !== curElement._id));
-        setCountCartItems(countCartItems - curElement.qty);
-      })
-      .catch(error => {
-        console.log(error, "Error removing product");
-      });
+  const onRemove = async (curElement) => {
+    try {
+      await axios.delete(`http://localhost:4000/product/${curElement._id}`);
+      setCartItems(cartItems.filter((x) => x._id !== curElement._id));
+      setCountCartItems(countCartItems - curElement.qty);
+    } catch (error) {
+      console.log(error, "Error removing product");
+    }
   };
 
-  const onAdd = (item) => {
+  const onAdd = async (item) => {
     const itemExist = cartItems.find((x) => x._id === item._id);
     if (itemExist) {
       setCartItems(
@@ -71,22 +71,18 @@ function App() {
     setCountCartItems(countCartItems + 1);
     setCartMessage("added to cart");
 
-    axios
-      .post("http://localhost:4000/product", item)
-      .then((response) => {
-        console.log("Product added successfully:", response.data);
-        updateProductData(response.data); // Call the updateProductData function
-      })
-      .catch((error) => {
-        console.error("Error adding product:", error);
-      });
+    try {
+      const response = await axios.post("http://localhost:4000/product", item);
+      console.log("Product added successfully:", response.data);
+      updateProductData(response.data); // Call the updateProductData function
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
   };
 
   const updateProductData = (newProduct) => {
     setProductData([...productData, newProduct]);
   };
-
- 
 
   const getProductData = () => {
     axios
@@ -117,7 +113,55 @@ function App() {
     }
   };
 
- 
+  const handlePayNow = async (totalAmount, productIds, quantities) => {
+    try {
+      const orderResponse = await axios.post("http://localhost:4000/Pay/orders", {
+        productIds,
+        amount: totalAmount,
+      });
+      console.log(orderResponse.data, "order mai kya aaya 43");
+      const orderData = orderResponse.data;
+      console.log(orderData, "orderData aaya  ");
+      const options = {
+        key: "rzp_test_LLTSrqLmpUtsIx",
+        amount: totalAmount * 100, // Convert to paise
+        currency: "INR",
+        order_id: orderData.id, // Make sure orderData contains the correct id field
+        handler: async (response) => {
+          console.log(response, "yyy");
+          const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+            response;
+          console.log(razorpay_signature, "razorpay_signature hai ");
+          try {
+            const verifyUrl = "http://localhost:4000/Pay/verify";
+            const verificationResponse = await axios.post(verifyUrl, {
+              razorpay_order_id,
+              razorpay_payment_id,
+              razorpay_signature,
+            });
+            console.log(verificationResponse.data);
+  
+            // Set the purchased product ID in state
+            setPurchasedProductId(productIds); // Replace with the actual product ID
+            setOrder(orderData); // Set the order data
+  
+            // After payment is verified, navigate to the download page
+            window.location.href = "/download";
+          } catch (error) {
+            console.log(error, "error occurred");
+          }
+        },
+        theme: {
+          color: "#121212",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
   return (
     <div>
@@ -126,7 +170,7 @@ function App() {
         <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
         <Route exact path='/Blogs' element={<Blog blogsData={blogs} />} />
         <Route exact path='/Contact' element={<Contact />} />
-        <Route exact path="/cart" element={<Cart cartItems={cartItems} data={productData} onRemove={onRemove} countCartItems={countCartItems} />} />
+        <Route exact path="/cart" element={<Cart cartItems={cartItems} onRemove={onRemove} countCartItems={countCartItems} handlePayNow={handlePayNow} />} />
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/adminPanel" element={<AdminPanel />} />
@@ -134,7 +178,7 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement />} />
-       
+        <Route path="/download" element={<DownloadPage purchasedProductId={purchasedProductId} order={order} />} /> {/* Pass order as a prop */}
       </Routes>
     </div>
   );
