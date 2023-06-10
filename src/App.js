@@ -24,7 +24,7 @@ function App() {
   const [cartMessage, setCartMessage] = useState('');
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
-  const [order, setOrder] = useState([]); // Add order state
+  // const [order, setOrder] = useState([]); // Add order state
 
 
   useEffect(() => {
@@ -112,12 +112,12 @@ function App() {
     }
   };
 
-  const handlePayNow = async (totalAmount, productIds, title) => {
+  const handlePayNow = async (totalAmount,productIds,title) => {
     try {
       const orderResponse = await axios.post("http://localhost:4000/pay/orders", {
         amount: totalAmount,
-        productIds: productIds,
-        title: title
+        productIds:productIds,
+        title:title
       });
       console.log(orderResponse.data, "order mai kya aaya 43");
       const orderData = orderResponse.data;
@@ -143,7 +143,7 @@ function App() {
 
             // Set the purchased product ID in state
             // setPurchasedProductId(productIds); // Replace with the actual product ID
-            setOrder(orderData); // Set the order data
+            // setOrder(orderData); // Set the order data
 
             // After payment is verified, navigate to the download page
             // window.location.href = "/download";
@@ -178,7 +178,7 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement  />} />
-        <Route path="/download" element={<DownloadPage order={order} />} /> {/* Pass order as a prop */}
+        <Route path="/download" element={<DownloadPage />} /> {/* Pass order as a prop */}
       </Routes>
     </div>
   );

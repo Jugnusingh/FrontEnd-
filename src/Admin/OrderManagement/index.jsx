@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import AdminNavbar from '../adminNavbar';
 
 const OrderManagement = () => {
-  const [orders, setOrders] = useState([]);
-
+  const [ordersData, setOrdersData] = useState([]);
+console.log(ordersData,"manmani chal rhai hai teri ")
   useEffect(() => {
     // Fetch orders from the backend
     fetchOrders();
@@ -12,22 +12,22 @@ const OrderManagement = () => {
   const fetchOrders = () => {
     // Make an API call to fetch orders from the backend
     // Example using fetch:
-    fetch('/api/orders')
+    fetch('http://localhost:4000/pay/orders')
       .then((response) => response.json())
-      .then((data) => setOrders(data))
+      .then((data) => setOrdersData(data))
       .catch((error) => console.error('Error fetching orders:', error));
   };
 
   const handleDeleteOrder = (orderId) => {
     // Make an API call to delete the order
     // Example using fetch:
-    fetch(`/api/orders/${orderId}`, {
+    fetch(`http://localhost:4000/pay/orders/${orderId}`, {
       method: 'DELETE',
     })
       .then((response) => {
         if (response.ok) {
           // Remove the deleted order from the local state
-          setOrders((prevOrders) =>
+          setOrdersData((prevOrders) =>
             prevOrders.filter((order) => order.id !== orderId)
           );
         } else {
@@ -46,16 +46,17 @@ const OrderManagement = () => {
           <tr>
             <th>Order ID</th>
             <th>Customer Name</th>
-            <th>Order Total</th>
+            <th>Product Title</th>
+            <th>Total Amount</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
-            <tr key={order.id}>
-              <td>{order.id}</td>
-              <td>{order.customerName}</td>
-              <td>{order.total}</td>
+          {ordersData.map((order) => (
+            <tr key={order._id}>
+              <td>{order._id}</td>
+              <td>{order.title}</td>
+              <td>{order.amount}</td>
               <td>
                 <button onClick={() => handleDeleteOrder(order.id)}>
                   Delete

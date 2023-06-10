@@ -22,7 +22,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
 
 const handleClickPayNow = () => {
   try {
-    const productIds = data.map((item) => item._id);
+    const productIds = data.map((item) => item._id)
     const title = data.map((item) => item.Title);
     const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
 
