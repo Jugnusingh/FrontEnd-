@@ -22,11 +22,11 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
 
 const handleClickPayNow = () => {
   try {
-    const productIds = data.map((item) => item.id);
-    const quantities = data.map((item) => item.qty);
+    const productIds = data.map((item) => item._id);
+    const title = data.map((item) => item.Title);
     const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
 
-    handlePayNow(totalAmount, productIds, quantities);
+    handlePayNow(totalAmount, productIds,title);
   } catch (error) {
     console.log(error);
   }
@@ -39,7 +39,7 @@ const handleClickPayNow = () => {
         <div className='left-div'>
           <Scrollbars>
             {data.map((item) => (
-              <div className='items-div' key={item.id}>
+              <div className='items-div' key={item._id}>
                 <img className='left-div-image' src={`http://localhost:4000/uploads/${item.Image}`} alt='hosi' />
                 <p className='title-div'>{item.Name}</p>
                 <div className='amount-div'>

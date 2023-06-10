@@ -24,9 +24,8 @@ function App() {
   const [cartMessage, setCartMessage] = useState('');
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
-  const [purchasedProductId, setPurchasedProductId] = useState([]);
   const [order, setOrder] = useState([]); // Add order state
-  console.log(order,"orderdata ")
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -113,11 +112,12 @@ function App() {
     }
   };
 
-  const handlePayNow = async (totalAmount, productIds, quantities) => {
+  const handlePayNow = async (totalAmount, productIds, title) => {
     try {
-      const orderResponse = await axios.post("http://localhost:4000/Pay/orders", {
-        productIds,
+      const orderResponse = await axios.post("http://localhost:4000/pay/orders", {
         amount: totalAmount,
+        productIds: productIds,
+        title: title
       });
       console.log(orderResponse.data, "order mai kya aaya 43");
       const orderData = orderResponse.data;
@@ -133,20 +133,20 @@ function App() {
             response;
           console.log(razorpay_signature, "razorpay_signature hai ");
           try {
-            const verifyUrl = "http://localhost:4000/Pay/verify";
+            const verifyUrl = "http://localhost:4000/pay/verify";
             const verificationResponse = await axios.post(verifyUrl, {
               razorpay_order_id,
               razorpay_payment_id,
               razorpay_signature,
             });
             console.log(verificationResponse.data);
-  
+
             // Set the purchased product ID in state
-            setPurchasedProductId(productIds); // Replace with the actual product ID
+            // setPurchasedProductId(productIds); // Replace with the actual product ID
             setOrder(orderData); // Set the order data
-  
+
             // After payment is verified, navigate to the download page
-            window.location.href = "/download";
+            // window.location.href = "/download";
           } catch (error) {
             console.log(error, "error occurred");
           }
@@ -161,7 +161,7 @@ function App() {
       console.log(error);
     }
   };
-  
+
 
   return (
     <div>
@@ -177,8 +177,8 @@ function App() {
         <Route exact path="/BlogUpload" element={<BlogUpload blogsData={blogs} setBlogs={setBlogs} />} />
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
-        <Route exact path="/Order" element={<OrderManagement />} />
-        <Route path="/download" element={<DownloadPage purchasedProductId={purchasedProductId} order={order} />} /> {/* Pass order as a prop */}
+        <Route exact path="/Order" element={<OrderManagement  />} />
+        <Route path="/download" element={<DownloadPage order={order} />} /> {/* Pass order as a prop */}
       </Routes>
     </div>
   );
