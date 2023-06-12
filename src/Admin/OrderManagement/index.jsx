@@ -1,78 +1,74 @@
 import React, { useEffect, useState } from 'react';
 import AdminNavbar from '../adminNavbar';
+import './OrderManagement.css'; // Import the CSS file for the component
 
-const OrderManagement = () => {
-  const [myorders, setOrders] = useState([]);
-  console.log(myorders, "ordermanagement");
- 
-  
-
+const OrderManagement = ({ myorders }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredOrders, setFilteredOrders] = useState(myorders);
 
   useEffect(() => {
-    // Fetch orders from the backend
-    fetchOrders();
-  }, []);
+    const filtered = myorders.filter((order) => {
+      const title = order.title ? order.title.toLowerCase() : '';
+      const orderId = order._id ? order._id.toLowerCase() : '';
+      return (
+        title.includes(searchTerm.toLowerCase()) ||
+        orderId.includes(searchTerm.toLowerCase())
+      );
+    });
+    setFilteredOrders(filtered);
+  }, [searchTerm, myorders]);
 
-  const fetchOrders = () => {
-    fetch('http://localhost:4000/pay/orders')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Fetched data:', data.orderData);
-        setOrders(data.orderData);
-      })
-      .catch((error) => console.error('Error fetching orders:', error));
-  };
-
-
-  const handleDeleteOrder = (orderId) => {
-    // Make an API call to delete the order
-    // Example using fetch:
-    fetch(`http://localhost:4000/pay/orders/${orderId}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Remove the deleted order from the local state
-          setOrders((prevOrders) =>
-            prevOrders.filter((order) => order.id !== orderId)
-          );
-        } else {
-          console.error('Error deleting order');
-        }
-      })
-      .catch((error) => console.error('Error deleting order:', error));
+  const formatIndianDate = (dateString) => {
+    const options = {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    };
+    return new Date(dateString).toLocaleString('en-IN', options);
   };
 
   return (
     <div>
       <AdminNavbar />
       <h2>Order Management</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Title</th>
-            <th>Order Total</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {myorders.map((order) => (
-           
-
-            <tr key={order._id}>
-              <td>{order._id}</td>
-              <td>{order.title}</td>
-              <td>₹{order.amount}</td>
-              <td>
-                <button onClick={() => handleDeleteOrder(order._id)}>
-                  Delete
-                </button>
-              </td>
+      <input
+        type="text"
+        placeholder="Search by title or Order ID"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <div className="order-table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredOrders.map((order) => (
+              <tr key={order._id} className="fade-in">
+                <td>{order._id}</td>
+                <td>{order.title}</td>
+                <td>₹{order.amount}</td>
+                <td>{order.status}</td>
+                <td>{formatIndianDate(order.createdAt)}</td>
+                <td>
+                  <button>Refund</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

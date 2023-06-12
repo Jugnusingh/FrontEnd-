@@ -1,0 +1,43 @@
+.cancelation-policy {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .cancelation-policy-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .cancelation-policy-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .cancelation-policy-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  .cancelation-policy-text p {
+    margin-bottom: 10px;
+  }
+  
+  .cancelation-policy-text ul {
+    padding-left: 20px;
+  }
+  
+  .cancelation-policy-text li {
+    margin-bottom: 10px;
+  }
+  
+  .cancelation-policy-link {
+    display: block;
+    margin-top: 20px;
+  }
+  

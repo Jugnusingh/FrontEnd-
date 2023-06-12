@@ -15,6 +15,7 @@ import UploadManagement from './Admin/ProductManagement/UploadManagement';
 import AdminPanel from './Admin/AdminPanel/AdminPanel';
 import Blog from './FrontEnd/Blogs';
 import DownloadPage from './DownloadPdf';
+import CancellationPolicy from './Policies/CancellationPolicy';
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -24,12 +25,13 @@ function App() {
   const [cartMessage, setCartMessage] = useState('');
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
-  // const [order, setOrder] = useState([]); // Add order state
+  const [myorders, setOrders] = useState([]);
+  const [match,setMatch]=useState([])
 
 
   useEffect(() => {
     const fetchData = async () => {
-      await Promise.all([getSliderData(), getCategories(), getProductData(), fetchBlogs()]);
+      await Promise.all([getSliderData(), getCategories(), getProductData(), fetchBlogs(),fetchOrders()]);
     };
 
     fetchData();
@@ -162,6 +164,15 @@ function App() {
     }
   };
 
+  const fetchOrders = () => {
+    fetch('http://localhost:4000/pay/orders')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Fetched data:', data.orderData);
+        setOrders(data.orderData);
+      })
+      .catch((error) => console.error('Error fetching orders:', error));
+  };
 
   return (
     <div>
@@ -177,8 +188,9 @@ function App() {
         <Route exact path="/BlogUpload" element={<BlogUpload blogsData={blogs} setBlogs={setBlogs} />} />
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
-        <Route exact path="/Order" element={<OrderManagement  />} />
-        <Route path="/download" element={<DownloadPage />} /> {/* Pass order as a prop */}
+        <Route exact path="/Order" element={<OrderManagement myorders={myorders} />} />
+        <Route path="/download" element={<DownloadPage />} /> 
+        <Route path="/CancellationPolicy" element={<CancellationPolicy />} /> 
       </Routes>
     </div>
   );
