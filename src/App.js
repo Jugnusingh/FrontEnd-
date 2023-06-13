@@ -26,7 +26,7 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
   const [myorders, setOrders] = useState([]);
-  const [match,setMatch]=useState([])
+ console.log(setOrders,"mmmmmmmmmmmm")
 
 
   useEffect(() => {
@@ -145,10 +145,10 @@ function App() {
 
             // Set the purchased product ID in state
             // setPurchasedProductId(productIds); // Replace with the actual product ID
-            // setOrder(orderData); // Set the order data
+            setOrders(orderData); // Set the order data
 
             // After payment is verified, navigate to the download page
-            // window.location.href = "/download";
+            window.location.href = "/download";
           } catch (error) {
             console.log(error, "error occurred");
           }
@@ -189,7 +189,7 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement myorders={myorders} />} />
-        <Route path="/download" element={<DownloadPage />} /> 
+        <Route path="/download" element={<DownloadPage productData={productData} myorders={myorders} />} /> 
         <Route path="/CancellationPolicy" element={<CancellationPolicy />} /> 
       </Routes>
     </div>

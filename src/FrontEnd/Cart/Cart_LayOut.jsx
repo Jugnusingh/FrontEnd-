@@ -33,69 +33,78 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
         console.log(error);
       }
     } else {
-      alert('Please accept the cancellation policy before proceeding to buy.');
+      alert('Please accept the Term and Conditions policy before proceeding to buy.');
     }
   };
 
   const handleTogglePolicy = () => {
     setIsPolicyAccepted(!isPolicyAccepted);
   };
-
   return (
-    <div className="cart-layout">
-      <div className="cart-heading">Shopping Cart</div>
-      <div className="cart-main">
-        <div className="cart-left">
-          <Scrollbars>
-            {data.map((item) => (
-              <div className="cart-item" key={item._id}>
-                <img className="cart-image" src={`http://localhost:4000/uploads/${item.Image}`} alt="hosi" />
-                <p className="cart-title">{item.Name}</p>
-                <div className="cart-amount">
-                  ₹ <span>{item.Price}</span>/-
-                </div>
-                <div className="cart-amount">
-                  Qty <span>{item.qty}</span>
-                </div>
-                <div className="cart-amount">
-                  Total <span>{item.Price * item.qty}</span>
-                </div>
-                <div className="cart-remove" onClick={() => handleClickRemove(item)}>
-                  <MdDelete />
-                </div>
+    <>
+      <div className='layout-div'>
+        <div className='heading'>Shopping Cart</div>
+        <div className='main-div'>
+          <div className='left-div'>
+            <Scrollbars>
+              <div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Prodcut</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                      <th>Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((item) => (
+                      <tr key={item.id}>
+                        <td><img className='left-div-image' src={`http://localhost:4000/uploads/${item.Image}`} alt='hosi' /></td>
+                        <td className='title-div'>{item.Title}</td>
+                        <td className='amount-div'>₹ <span>{item.Price}/-</span></td>
+                        <td className='amount-div'>Qty <span>{item.qty}</span></td>
+                        <td className='amount-div'>Total <span>{item.Price * item.qty}</span></td>
+                        <td className='remove-div' onClick={() => handleClickRemove(item)}>
+                          <MdDelete />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            ))}
-          </Scrollbars>
+            </Scrollbars>
+          </div>
+          <div className='right-div'>
+            <h1>
+              Subtotal <span>{countCartItems} items</span>
+            </h1>
+            <p>
+              <span>₹ {totalAmount}</span>
+            </p>
+            <button className='btn' onClick={handleClickPayNow}>
+              Proceed to Buy
+            </button>
+            {showMessage && <div>Added to Cart</div>}
+          </div>
         </div>
-        <div className="cart-right">
-          <h1>
-            Subtotal <span>{countCartItems} items</span>
-          </h1>
-          <p>
-            <span className="cart-total-amount">₹ {totalAmount}</span>
-          </p>
-          <button className="cart-btn" onClick={handleClickPayNow}>
-            Proceed to Buy
-          </button>
-         
-          {showMessage && <div className="cart-message">Added to Cart</div>}
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
+        <div className="cart-checkbox-div">
+          <input
+            type="checkbox"
+            checked={isPolicyAccepted}
+            onChange={handleTogglePolicy}
+          />
+          <p>I accept the Term and Conditions</p>
+          <Link to="/CancellationPolicy" className="cart-cancellation-policy-link">
+            Term and Conditions
+          </Link>
         </div>
       </div>
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <label className="cart-checkbox-label">
-        <input
-          type="checkbox"
-          checked={isPolicyAccepted}
-          onChange={handleTogglePolicy}
-        />
-        <span className="cart-checkmark"></span>
-        I accept the cancellation policy
-      </label>
-      <Link to="/CancellationPolicy" className="cart-cancellation-policy-link">
-        Cancellation Policy
-      </Link>
-    </div>
-  );
-};
 
+    </>
+  )
+};
 export default Cart_LayOut;
