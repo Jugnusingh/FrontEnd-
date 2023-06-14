@@ -1,0 +1,54 @@
+/* Shared styles for all pages */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  ul {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  a {
+    color: #0366d6;
+  }
+  
+  /* Disclaimer page specific styles */
+  .disclaimer-page {
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-radius: 4px;
+  }
+  
+  /* Privacy Policy page specific styles */
+  .privacy-policy-page {
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-radius: 4px;
+  }
+  
+  /* Terms and Conditions page specific styles */
+  .terms-and-conditions-page {
+    background-color: #f7f7f7;
+    padding: 40px;
+    border-radius: 4px;
+  }
+  

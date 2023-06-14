@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import "./index.css";
 import axios from 'axios';
 import Navbar from './FrontEnd/Header/Navbar';
+import Footer from './FrontEnd/Footer';
 import Home from './FrontEnd/Home';
 import Contact from './FrontEnd/Contact';
 import Cart from './FrontEnd/Cart';
@@ -16,6 +17,9 @@ import AdminPanel from './Admin/AdminPanel/AdminPanel';
 import Blog from './FrontEnd/Blogs';
 import DownloadPage from './DownloadPdf';
 import CancellationPolicy from './Policies/CancellationPolicy';
+import Disclaimer from './Policies/Disclaimer'
+import PrivacyPolicy from './Policies/PrivacyPolicy'
+import TermsAndConditions from './Policies/TermsAndConditions'
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -26,7 +30,7 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
   const [myorders, setOrders] = useState([]);
- console.log(setOrders,"mmmmmmmmmmmm")
+ 
 
 
   useEffect(() => {
@@ -189,9 +193,13 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement myorders={myorders} />} />
-        <Route path="/download" element={<DownloadPage productData={productData} myorders={myorders} />} /> 
-        <Route path="/CancellationPolicy" element={<CancellationPolicy />} /> 
+        <Route exact path="/download" element={<DownloadPage productData={productData} myorders={myorders} />} /> 
+        <Route exact path="/CancellationPolicy" element={<CancellationPolicy />} /> 
+        <Route exact path="/Disclaimer" element={<Disclaimer />} /> 
+        <Route exact path="/TermsAndConditions" element={<TermsAndConditions/>} /> 
+        <Route exact path="/PrivacyPolicy" element={<PrivacyPolicy />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
