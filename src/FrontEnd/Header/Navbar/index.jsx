@@ -1,16 +1,20 @@
+
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-// import SearchBar from '../SearchBar'
 import "./Navbar.css"
 
 const Navbar = ({ countCartItems }) => {
   return (
     <div>
       <div className="grad-bar"></div>
-      <nav className="navbar">
-        <NavLink className="logo" to='/'> DalalTechnologies</NavLink>
-        <div className='nav'>
-          {/* <SearchBar/> */}
+       <nav className="navbar">
+            {/* <div className="hamburger-lines">
+            <span className="line-line1"></span>
+            <span className="line-line2"></span>
+            <span className="line-line3"></span>
+            </div> */}
+          <NavLink className="logo" to='/'> DalalTechnologies</NavLink>
+          <div className='nav'>
           <NavLink className='nav1' to="/">Home</NavLink>
           <NavLink className='nav1' to="/Blogs">Blogs</NavLink>
           <NavLink className='nav1' to="/Project">Shop</NavLink>

@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  width: 95vw;
+  width: auto;
   padding-top: 40px;
   overflow-y: auto;
 }
@@ -15,6 +15,7 @@
   flex-direction: column;
   text-align: center;
   padding: 40px;
+  margin-bottom: -60px;
 }
 
 .footer-content h3 {
@@ -63,8 +64,7 @@
 }
 
 .footer-bottom {
-  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-  width: 95vw;
+  width: auto;
   padding: 20px;
   padding-bottom: 40px;
   text-align: center;

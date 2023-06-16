@@ -50,15 +50,15 @@ const AdminNavbar = () => {
 
   return (
     <div>
-      <div className="grad-bar"></div>
-      <nav className="navbar">
-        <NavLink className="logo" to='/'>DalalTechnologies</NavLink>
-        <div className='nav'>
-          <NavLink className='nav1' to="/Order" onClick={handleActivity}>Order Management</NavLink>
-          <NavLink className='nav1' to="/BlogUpload" onClick={handleActivity}>BlogUpload</NavLink>
-          <NavLink className='nav1' to="/UploadManagement" onClick={handleActivity}>UploadManagement</NavLink>
-          <NavLink className='nav1' to="/CategoryUpload" onClick={handleActivity}>CategoryUpload</NavLink>
-          <button className="logout-button" onClick={logoutUser}>Logout</button>
+      <div className="-admin-grad-bar"></div>
+      <nav className="admin-navbar">
+        <NavLink className="admin-logo" to='/'>DalalTechnologies</NavLink>
+        <div className='admin-nav'>
+          <NavLink className='admin-nav1' to="/Order" onClick={handleActivity}>Order Management</NavLink>
+          <NavLink className='admin-nav1' to="/BlogUpload" onClick={handleActivity}>BlogUpload</NavLink>
+          <NavLink className='admin-nav1' to="/UploadManagement" onClick={handleActivity}>UploadManagement</NavLink>
+          <NavLink className='admin-nav1' to="/CategoryUpload" onClick={handleActivity}>CategoryUpload</NavLink>
+          <button className="admin-logout-button" onClick={logoutUser}>Logout</button>
         </div>
       </nav>
     </div>

@@ -4,10 +4,10 @@ import axios from 'axios';
 
 const ContactUs = () => {
   const [inputValue, setInputValue] = useState({
-    username: '',
-    email: '',
-    subject: '',
-    message: ''
+    username: "",
+    email: "",
+    mobile: "",
+    message: "",
   });
 
   const handleValue = (e) => {
@@ -21,13 +21,12 @@ const ContactUs = () => {
   const handleLoginForm = async (e) => {
     e.preventDefault();
 
-    const { username, email, subject, message } = inputValue;
-
+    const { username, email, mobile, message } = inputValue;
     // Prepare the email data
     const emailData = {
       username,
       email,
-      subject,
+      mobile,
       message
     };
 
@@ -43,52 +42,52 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="container1">
-      <div className="signin-signup">
-        <form action="#" className="sign-in-form fm" onSubmit={handleLoginForm}>
-          <h2 className="title">Contact Us</h2>
-          <div className="input-field">
-            <i className="fas fa-user"></i>
-            <input type="text" placeholder="Name" name="username" onChange={handleValue} required />
-          </div>
-          <div className="input-field">
-            <i className="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" name="email" onChange={handleValue} required />
-          </div>
-          <div className="input-field">
-            <i className="fas fa-book"></i>
-            <input type="text" placeholder="Subject" name="subject" onChange={handleValue} required />
-          </div>
-          <div className="input-field">
-            <i className="fas fa-comment"></i>
-            <textarea
-              placeholder="Message"
-              name="message"
+    <div className="contact-container">
+      <div className="contact">
+        <form action="#" className="contact-sign-in-form" onSubmit={handleLoginForm}>
+          <h2 className="contact-title">Contact Us</h2>
+          <div className="contact-input-field">
+            <input
+              type="text"
+              placeholder="Your Name"
+              name="username"
+              value={inputValue.username}
               onChange={handleValue}
-              required
-            ></textarea>
+            />
           </div>
-          <button className="btn solid" type="submit">Send Email</button>
-          <p className="social-text">Or Contact us with our social platforms</p>
-          <div className="social-media">
-            <a href="#" className="social-icon">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#" className="social-icon">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
+          <div className="contact-input-field">
+            <input
+              type="text"
+              placeholder="Your Email"
+              name="email"
+              value={inputValue.email}
+              onChange={handleValue}
+            />
           </div>
+          <div className="contact-input-field">
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              name="mobile"
+              value={inputValue.mobile}
+              onChange={handleValue}
+            />
+          </div>
+          <div className="contact-input-field">
+            <input
+              type="text"
+              placeholder="Your Message"
+              name="message"
+              value={inputValue.message}
+              onChange={handleValue}
+            />
+          </div>
+          <center><button className="contact-btn solid">Send</button></center>
         </form>
       </div>
-      <div className="panels-container">
-        <div className="panel left-panel">
-          <img src="Images/contact.png" className="image" alt="" />
+      <div className="contact-panels-container">
+        <div className="contact-panel contact-left-panel">
+          <img src="Images/contact.png" className="contact-image" alt="" />
         </div>
       </div>
     </div>

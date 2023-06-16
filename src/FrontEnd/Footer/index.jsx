@@ -27,7 +27,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p>
-          copyright &copy; <a href="#">DalalTechnologies</a>
+          copyright &copy; <a href="http://localhost:3000/">DalalTechnologies</a>
         </p>
         <div className="footer-menu">
           <ul className="f-menu">
