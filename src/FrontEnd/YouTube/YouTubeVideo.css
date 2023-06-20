@@ -1,0 +1,31 @@
+/* YouTubeVideo.css */
+
+.video-card {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.video-thumbnail {
+  cursor: pointer;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: auto;
+}
+
+.video-details h3 {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin-right: 10px;
+}
