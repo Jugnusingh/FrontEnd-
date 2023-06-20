@@ -15,7 +15,9 @@ function YouTubeVideo() {
   const fetchVideos = async () => {
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCilEr1rW-SIrJlJ5_ioKQfw&maxResults=10&order=date&type=video&key=AIzaSyC0qv0Yo_jL1LRubYue4lScqyHTfor-eFc`
+        `https://www.googleapis.com/youtube/v3
+        /search?part=snippet&channelId=yourchannel id &maxResults=
+        10&order=date&type=video&key=YourApiKey`
         );
       setVideos(response.data.items);
     } catch (error) {
