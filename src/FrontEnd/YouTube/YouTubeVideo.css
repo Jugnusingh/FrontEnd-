@@ -1,31 +1,105 @@
-/* YouTubeVideo.css */
+
+.video-slider {
+  overflow: hidden;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.slider-content {
+  display: flex;
+  animation: slideAnimation 100s infinite;
+}
+
+.slider-content:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slideAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
 .video-card {
-  display: inline-block;
-  width: 200px;
-  margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  transition: transform 0.9s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 250px;
+  max-height: 300px;
+  min-width: 250px;
+  min-height: 300px;
+  border-radius: 20px;
+  margin: 10px;
+  outline: 1px solid lightgrey;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-card:hover {
+  transform: scale(1.1);
 }
 
 .video-thumbnail {
+  position: relative;
   cursor: pointer;
 }
 
 .video-thumbnail img {
   width: 100%;
   height: auto;
+  max-width: 250px;
+  min-width: 250px;
+  border-radius: 20px;
+}
+
+.video-thumbnail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  border-radius: 20px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.video-details {
+  margin-top: 14px;
+  text-align: center;
 }
 
 .video-details h3 {
+  font-size: 16px;
+  font-weight: bold;
   margin: 0;
-  padding: 10px 0;
 }
 
-.pagination {
-  margin-top: 20px;
-}
 
-.pagination button {
-  margin-right: 10px;
+@media (max-width: 768px) {
+  .video-card {
+    max-width: 200px;
+    max-height: 240px;
+    min-width: 200px;
+    min-height: 240px;
+  }
+
+  .video-card:hover {
+    transform: scale(1);
+  }
+
+  .video-thumbnail img {
+    max-width: 200px;
+    min-width: 200px;
+  }
 }
