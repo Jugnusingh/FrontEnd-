@@ -91,8 +91,7 @@ const Login = () => {
           </div>
           <button className="btn solid">Login</button>
           <div className="Login-Response">{message}</div>
-        </form>
-        
+        </form> 
       </div>
       <div className="panels-container">
         <div className="panel left-panel">

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './YouTubeVideo.css'
-const apiKey = 'apikey ';
-const channelId = 'channel_key';
+const apiKey = '';
+const channelId = '';
 
 function YouTubeVideo() {
   const [videos, setVideos] = useState([]);
