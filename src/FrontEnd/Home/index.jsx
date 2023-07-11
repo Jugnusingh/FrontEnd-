@@ -2,6 +2,8 @@ import React from 'react'
 import ImageSlider from '../Slider/imageSlider'
 import './Home.css'
 import YouTubeVideo from '../YouTube/YouTubeVideo';
+import YouTubeSubscribeButton from '../YouTube/SubscribeButton';
+import SubscribeButton from '../YouTube/SubscribeButton';
 const Home = ({ productData }) => {
   return (
     <div>
@@ -38,7 +40,7 @@ const Home = ({ productData }) => {
       <br></br>
       <center><h1>Our Review </h1></center>
       <div className='Youtube-cannel'>
-      
+      <SubscribeButton/>
       </div>
       <br></br>
       <center><h1>write a Review </h1></center>

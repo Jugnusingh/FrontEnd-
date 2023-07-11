@@ -41,7 +41,6 @@ const Login = () => {
         inputValue
       );
       
-      console.log(response, 'hhhhhhhhh');
       localStorage.setItem("token",response.data.token)
       if (response.status === 200) {
         console.log("1234567890")

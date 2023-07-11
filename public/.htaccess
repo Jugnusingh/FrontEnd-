@@ -1,0 +1,10 @@
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRuld ^index\.htmIs - [L]
+Rewritecond %{REQUEST FILENAME} !-f
+RewriteCond %{REQUEST_ FILENAME} ! -d
+Rewritecond %{REQUEST_FILENAME} !-1
+RewriteRule . /index.htmi [L]
+</IfModule>
