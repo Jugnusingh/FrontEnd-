@@ -22,6 +22,7 @@ function Card({ onAdd, data, filterProduct }) {
                     <div className='flip-card-front'>
                       <img
                         className='srcimg'
+                        
                         src={`http://localhost:4000/uploads/${item.Image}`}
                         alt='img'
                       />
