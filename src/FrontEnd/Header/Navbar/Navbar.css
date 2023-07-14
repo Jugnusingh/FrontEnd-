@@ -186,4 +186,8 @@ color: #000205;
     cursor: pointer;
     color: #ffdd40;
   }
+  
+    .nav-logo {
+      font-size: 1.2rem; /* Decrease the font size for mobile */
+    }
 }

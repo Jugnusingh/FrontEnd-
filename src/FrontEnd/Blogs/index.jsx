@@ -22,12 +22,14 @@ const Blog = ({ blogsData }) => {
 
       {blogsData.map((blog) => (
         <div className="blog-item" key={blog._id}>
-          <img
-            className="srcimg"
-            src={`${API_BASE_URL}/uploads/${blog.Image}`}
-            alt="img"
-          />
-          <h3>Title: {blog.Title}</h3>
+          <div className="blog-header">
+            <h3 className="blog-title">{blog.Title}</h3>
+            <img
+              className="blog-image"
+              src={`${API_BASE_URL}/uploads/${blog.Image}`}
+              alt="img"
+            />
+          </div>
           <div className="blog-content">
             {expandedBlogs.includes(blog._id) ? (
               <div>

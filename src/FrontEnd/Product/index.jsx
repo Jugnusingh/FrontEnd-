@@ -23,12 +23,10 @@ const Product = ({ productData, onAdd, categories }) => {
             </div>
           ))}
         </div>
-
-        <div className='card-right-parent'>
           <div className='card-right-body'>
             <Card data={productData} onAdd={onAdd} filterProduct={filterProduct} />
           </div>
-        </div>
+     
       </div>
     </div>
   );

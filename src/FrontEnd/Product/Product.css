@@ -1,35 +1,40 @@
 .card-body {
-  width: 1320px;
-    padding-top: 10px;
-    border-radius: 2px;
-    display: flex;
+  max-width: 1320px;
+  width: 100%;
+  padding-top: 10px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
 }
 
 .card-left-body {
   position: relative;
   text-align: center;
-  width: 15%; 
+  width: 100%;
+  max-width: 200px;
   border-right: 2px solid black;
   margin-right: 10px;
   padding-right: 10px;
-  
 }
-.card-right-parent{
-    /* flex-wrap: nowrap; */
-    width: 85%;
-    display: flex;
+
+.card-right-parent {
+  width: calc(100% - 220px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 .card-right-body {
   padding: 0 10px;
   width: 100%;
-  
+ 
 }
 
-
-.card-left-body h1 {
+.card-left-body h2 {
   text-align: center;
   font-size: medium;
   position: relative;
+  margin-top: 0;
 }
 
 .btn-mca {
@@ -47,33 +52,52 @@
   display: inline-block;
   cursor: pointer;
   transition: 0.5s;
-  background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  -webkit-animation: gradbar 15s ease infinite;
-  -moz-animation: gradbar 15s ease infinite;
   animation: gradbar 15s ease infinite;
 }
 
 .btn-mca:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(224, 24, 24, 0.2);
 }
 
-/* Dropdown Content (Hidden by Default) */
-/* .li-btn-mca {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-} */
+@keyframes gradbar {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
+@media (max-width: 767px) {
+  .card-body {
+    flex-direction: column;
+    align-items: center;
+  }
 
-@media screen and (max-width: 600px) {
-  .column {
+  .card-left-body {
     width: 100%;
-    display: block;
-    margin-bottom: 20px;
+    max-width: none;
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+
+  .card-right-parent {
+    width: 100%;
+  
+    align-items: center;
+  }
+
+  .card-right-body {
+    text-align: center;
+    
   }
 }
