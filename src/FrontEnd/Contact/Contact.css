@@ -3,22 +3,22 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 630px;
   width: auto;
   margin-top: auto;
-  overflow: hidden;
+  margin-bottom: 100px;
+  height:2330px;
 }
+
 
 .contact {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 1rem;
   margin-left: auto;
   margin-top: auto;
-  background-color: aqua;
-
+ /* background-color: aqua; */
 }
 
 .contact-title {
@@ -84,7 +84,9 @@
   width: 100%;
   height: auto;
   object-fit: contain;
+  
 }
+
 
 @media screen and (max-width: 767px) {
   .contact-container {
@@ -101,6 +103,7 @@
   .contact-panel.contact-left-panel {
     width: 100%;
   }
+  
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
