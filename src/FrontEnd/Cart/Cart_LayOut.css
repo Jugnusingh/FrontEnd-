@@ -80,7 +80,7 @@
 .right-div {
   text-align: center;
   background-color: green transparent;
-  height: 350px;
+  height: 370px;
   width: 25%;
   margin: 2% auto;
   border-radius: 5px;
@@ -120,8 +120,23 @@
 .cart-checkbox-div {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 50px;
+  justify-content: center;
+  animation: fadeIn 3s ease; /* Use the fadeIn animation with a duration of 1 second */
 }
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
 
 /* Media Queries for Responsive Design */
 

@@ -102,6 +102,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
             Term and Conditions
           </Link>
         </div>
+        
       </div>
 
     </>
