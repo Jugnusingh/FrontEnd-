@@ -7,37 +7,58 @@ const ContactUs = () => {
     username: "",
     email: "",
     mobile: "",
+    subject: "",
     message: "",
   });
+
+  const [responseMessage, setResponseMessage] = useState("");
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const handleValue = (e) => {
     const { name, value } = e.target;
     setInputValue((prevInputValue) => ({
       ...prevInputValue,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleLoginForm = async (e) => {
     e.preventDefault();
 
-    const { username, email, mobile, message } = inputValue;
-    // Prepare the email data
-    const emailData = {
-      username,
-      email,
-      mobile,
-      message
-    };
+    const { username, email, mobile, subject, message } = inputValue;
+    // Form validation
+    if (!username || !email || !mobile || !subject || !message) {
+      setResponseMessage("All fields are required.");
+      return;
+    }
+
+    // Email validation
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setResponseMessage("Invalid email address.");
+      return;
+    }
 
     try {
       // Send the email using an API endpoint
-      await axios.post('http://203.123.33.138:4000/Contact', emailData);
-      // TODO: Add logic for successful email submission
-      console.log('Email sent');
+      await axios.post('http://203.123.33.138:4000/Contact', inputValue);
+      setIsFormSubmitted(true);
+      setResponseMessage('Email sent successfully!');
+      setInputValue({
+        username: "",
+        email: "",
+        mobile: "",
+        subject: "",
+        message: "",
+      });
+
+      setTimeout(() => {
+        setIsFormSubmitted(false);
+        setResponseMessage("");
+      }, 5000);
     } catch (error) {
       console.error('Error sending email:', error);
-      // TODO: Add error handling logic
+      setIsFormSubmitted(false);
+      setResponseMessage('An error occurred while sending the email.');
     }
   };
 
@@ -76,22 +97,34 @@ const ContactUs = () => {
           <div className="contact-input-field">
             <input
               type="text"
+              placeholder="Subject"
+              name="subject"
+              value={inputValue.subject}
+              onChange={handleValue}
+            />
+          </div>
+          <div className="contact-input-field">
+            <input
+              type="text"
               placeholder="Your Message"
               name="message"
               value={inputValue.message}
               onChange={handleValue}
             />
           </div>
-          <center><button className="contact-btn solid">Send</button></center>
+          <center>
+            <button className="contact-btn solid" disabled={isFormSubmitted}>
+              {isFormSubmitted ? 'Sending...' : 'Send'}
+            </button>
+            {responseMessage && <p>{responseMessage}</p>}
+          </center>
         </form>
-        
       </div>
       <div className="contact-panels-container">
         <div className="contact-panel contact-left-panel">
           <img src="Images/contact.png" className="contact-image" alt="" />
         </div>
       </div>
-      
     </div>
   );
 };
