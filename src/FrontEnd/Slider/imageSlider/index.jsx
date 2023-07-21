@@ -6,7 +6,7 @@ const ImageSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:4000/image')
+    axios.get('http://203.123.33.138:4000/image')
       .then(response => {
         setImages(response.data.imageData);
       })

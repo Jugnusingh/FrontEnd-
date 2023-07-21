@@ -19,7 +19,7 @@ const UploadProduct = ({ categories, updateProductData }) => {
     formData.append('Image', Image);
     formData.append('Pdf', Pdf);
 
-    const url = 'http://127.0.0.1:4000/product';
+    const url = 'http://203.123.33.138:4000/product';
     const response = await fetch(url, {
       method: 'POST',
       body: formData,

@@ -11,19 +11,24 @@ const Footer = () => {
           DalalTechnologies is a leading technology company specializing in software development and IT solutions. With a dedicated team of skilled professionals, we strive to deliver innovative and high-quality solutions to our clients.
         </p>
         <div className="social-media">
-          <a href="#" className="social-icon">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" className="social-icon">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#" className="social-icon">
-            <i className="fab fa-google"></i>
-          </a>
-          <a href="#" className="social-icon">
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-        </div>
+  <a href="https://www.facebook.com/dalal.tech/" className="social-icon" target="_blank">
+    <i className="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.twitter.com/dalaltechnologies/" className="social-icon" target="_blank">
+    <i className="fab fa-twitter"></i>
+  </a>
+  <a href="https://www.instagram.com/dalaltechnologies/" className="social-icon" target="_blank">
+    <i className="fab fa-instagram"></i>
+  </a>
+  <a href="https://wa.me/message/5YN63JUGKQY3B1" className="social-icon" target="_blank">
+    <i className="fab fa-whatsapp"></i>
+  </a>
+  <a href="https://www.youtube.com/@Dalaltechnologies" className="social-icon" target="_blank">
+    <i className="fab fa-youtube"></i>
+  </a>
+</div>
+
+
       </div>
       <div className="footer-bottom">
         <p>

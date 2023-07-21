@@ -32,7 +32,7 @@ const ContactUs = () => {
 
     try {
       // Send the email using an API endpoint
-      await axios.post('http://localhost:4000/Contact', emailData);
+      await axios.post('http://203.123.33.138:4000/Contact', emailData);
       // TODO: Add logic for successful email submission
       console.log('Email sent');
     } catch (error) {
@@ -84,12 +84,14 @@ const ContactUs = () => {
           </div>
           <center><button className="contact-btn solid">Send</button></center>
         </form>
+        
       </div>
       <div className="contact-panels-container">
         <div className="contact-panel contact-left-panel">
           <img src="Images/contact.png" className="contact-image" alt="" />
         </div>
       </div>
+      
     </div>
   );
 };

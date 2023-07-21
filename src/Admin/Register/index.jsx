@@ -21,7 +21,7 @@ setUsername({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/admin/signup",username)
+      const response = await axios.post("http://203.123.33.138:4000/admin/signup",username)
       console.log(response.data.username); // display prompt message
   } catch (error) {
     console.error(error);

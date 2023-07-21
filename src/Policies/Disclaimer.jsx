@@ -2,7 +2,7 @@ import React from 'react';
 
 const Disclaimer = () => {
   return (
-    <div className="container disclaimer-page">
+    <div className="container-disclaimer-page">
       <h1>Disclaimer</h1>
       <p>Welcome to DalalTechnologies. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following disclaimer, which together with our terms and conditions of use govern our relationship with you regarding this website. The term 'us' or 'we' refers to the owners of the website. The term 'you' refers to the user or viewer of our website.</p>
 
