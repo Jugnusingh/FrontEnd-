@@ -1,0 +1,89 @@
+/* SliderImage.css */
+
+
+  .imageslider {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+  }
+ 
+  .imageslider-form {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  
+  .imageslider h2 {
+    margin-bottom: 15px;
+  }
+  
+  .imageslider label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .imageslider input,
+  .imageslider textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .imageslider textarea {
+    resize: vertical;
+  }
+  
+  .imageslider button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .imageslider button:hover {
+    background-color: #0056b3;
+  }
+  
+  .imageslider-image {
+    position: relative;
+    width: 230px;
+    height: 130px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .imageslider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff4444;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .delete-button:hover {
+    background-color: #cc0000;
+  }
+  

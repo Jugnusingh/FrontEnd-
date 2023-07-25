@@ -55,6 +55,7 @@ const AdminNavbar = () => {
         <NavLink className="admin-logo" to='/'>DalalTechnologies</NavLink>
         <div className='admin-nav'>
           <NavLink className='admin-nav1' to="/Order" onClick={handleActivity}>Order Management</NavLink>
+          <NavLink className='admin-nav1' to="/SliderImage" onClick={handleActivity}>Slider</NavLink>
           <NavLink className='admin-nav1' to="/BlogUpload" onClick={handleActivity}>BlogUpload</NavLink>
           <NavLink className='admin-nav1' to="/UploadManagement" onClick={handleActivity}>UploadManagement</NavLink>
           <NavLink className='admin-nav1' to="/CategoryUpload" onClick={handleActivity}>CategoryUpload</NavLink>

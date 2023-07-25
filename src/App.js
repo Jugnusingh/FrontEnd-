@@ -20,6 +20,7 @@ import CancellationPolicy from './Policies/CancellationPolicy';
 import Disclaimer from './Policies/Disclaimer'
 import PrivacyPolicy from './Policies/PrivacyPolicy'
 import TermsAndConditions from './Policies/TermsAndConditions'
+import SliderImage from './Admin/SliderImageUpload /SliderImage';
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -189,6 +190,7 @@ function App() {
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/adminPanel" element={<AdminPanel />} />
+        <Route exact path="/SliderImage" element={<SliderImage images={imageData} />} />
         <Route exact path="/BlogUpload" element={<BlogUpload blogsData={blogs} setBlogs={setBlogs} />} />
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />

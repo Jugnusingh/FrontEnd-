@@ -2,10 +2,10 @@ import React from 'react'
 import ImageSlider from '../Slider/imageSlider'
 import './Home.css'
 import YouTubeVideo from '../YouTube/YouTubeVideo';
-const Home = ({ productData }) => {
+const Home = ({ productData ,image}) => {
   return (
     <div>
-      <ImageSlider />
+      <ImageSlider  image ={image}/>
       <center><h1>About Us</h1></center>
       <div className='about-us-div'>
         <div className="about-us">
