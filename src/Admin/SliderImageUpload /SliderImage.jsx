@@ -1,5 +1,3 @@
-// SliderImage.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./SliderImage.css";
@@ -8,7 +6,7 @@ const SliderImage = ({ images }) => {
   const [newImage, setNewImage] = useState({
     Title: '',
     Description: '',
-    ImgUrl: null,
+    Image: null, // Update field name to 'Image'
   });
 
   const handleImageUpload = async (event) => {
@@ -17,15 +15,15 @@ const SliderImage = ({ images }) => {
     const formData = new FormData();
     formData.append('Title', newImage.Title);
     formData.append('Description', newImage.Description);
-    formData.append('ImgUrl', newImage.ImgUrl);
+    formData.append('Image', newImage.Image); // Use 'Image' instead of 'ImgUrl'
 
     try {
-      const response = await axios.post('http://203.123.33.138:4000/image', formData);
+      const response = await axios.post('http://http://203.123.33.138:4000/image', formData);
       console.log('Image uploaded successfully:', response.data.newImg);
       setNewImage({
         Title: '',
         Description: '',
-        ImgUrl: '',
+        Image: null, // Reset Image field
       });
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -65,16 +63,16 @@ const SliderImage = ({ images }) => {
         ></textarea><br />
         <input
           type="file"
-          id="ImgUrl"
-          name="ImgUrl"
-          onChange={(e) => setNewImage({ ...newImage, ImgUrl: e.target.files[0] })}
+          id="Image" // Use 'Image' as the field name
+          name="Image" // Use 'Image' as the field name
+          onChange={(e) => setNewImage({ ...newImage, Image: e.target.files[0] })} // Use 'Image' as the field name
         /><br />
         <button className='imageslider-button' type="submit">Upload Image</button>
       </form>
       {/* Display existing images */}
       {images.map((img) => (
         <div key={img._id} className='imageslider-image'>
-          <img src={img.ImgUrl} alt={img.Title} />
+          <img src={`http://203.123.33.138:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
           <button className='delete-button' onClick={() => handleImageDelete(img._id)}>Delete</button>
         </div>
       ))}
