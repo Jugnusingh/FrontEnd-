@@ -19,7 +19,7 @@ function Card({ onAdd, data, filterProduct }) {
               <div className='flip-card-front'>
                 <img
                   className='srcimg'
-                  src={`http://203.123.33.138:4000/uploads/${item.Image}`}
+                  src={`http://localhost:4000/uploads/${item.Image}`}
                   alt='img'
                 />
               </div>
@@ -47,7 +47,7 @@ function Card({ onAdd, data, filterProduct }) {
               <div className='flip-card-front'>
                 <img
                   className='srcimg'
-                  src={`http://203.123.33.138:4000/uploads/${item.Image}`}
+                  src={`http://localhost:4000/uploads/${item.Image}`}
                   alt='img'
                 />
               </div>

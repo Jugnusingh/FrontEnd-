@@ -44,7 +44,7 @@ function App() {
 
   const getSliderData = () => {
     axios
-      .get("http://203.123.33.138:4000/image")
+      .get("http://localhost:4000/image")
       .then((result) => {
         setImageData(result.data.imageData);
       })
@@ -55,7 +55,7 @@ function App() {
 
   const onRemove = async (curElement) => {
     try {
-      await axios.delete(`http://203.123.33.138:4000/product/${curElement._id}`);
+      await axios.delete(`http://localhost:4000/product/${curElement._id}`);
       setCartItems(cartItems.filter((x) => x._id !== curElement._id));
       setCountCartItems(countCartItems - curElement.qty);
     } catch (error) {
@@ -78,7 +78,7 @@ function App() {
     setCartMessage("added to cart");
 
     try {
-      const response = await axios.post("http://203.123.33.138:4000/product", item);
+      const response = await axios.post("http://localhost:4000/product", item);
       console.log("Product added successfully:", response.data);
       updateProductData(response.data); // Call the updateProductData function
     } catch (error) {
@@ -92,7 +92,7 @@ function App() {
 
   const getProductData = () => {
     axios
-      .get("http://203.123.33.138:4000/product")
+      .get("http://localhost:4000/product")
       .then((result) => {
         setProductData(result.data.productData);
       })
@@ -103,7 +103,7 @@ function App() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get("http://203.123.33.138:4000/Blog");
+      const response = await axios.get("http://localhost:4000/Blog");
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching Blogs:", error);
@@ -112,7 +112,7 @@ function App() {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get('http://203.123.33.138:4000/categories');
+      const response = await axios.get('http://localhost:4000/categories');
       setCategories(response.data);
     } catch (error) {
       console.log(error);
@@ -121,7 +121,7 @@ function App() {
 
   const handlePayNow = async (totalAmount,productIds,title) => {
     try {
-      const orderResponse = await axios.post("http://203.123.33.138:4000/pay/orders", {
+      const orderResponse = await axios.post("http://localhost:4000/pay/orders", {
         amount: totalAmount,
         productIds:productIds,
         title:title
@@ -140,7 +140,7 @@ function App() {
             response;
           console.log(razorpay_signature, "razorpay_signature hai ");
           try {
-            const verifyUrl = "http://203.123.33.138:4000/pay/verify";
+            const verifyUrl = "http://localhost:4000/pay/verify";
             const verificationResponse = await axios.post(verifyUrl, {
               razorpay_order_id,
               razorpay_payment_id,
@@ -170,7 +170,7 @@ function App() {
   };
 
   const fetchOrders = () => {
-    fetch('http://203.123.33.138:4000/pay/orders')
+    fetch('http://localhost:4000/pay/orders')
       .then((response) => response.json())
       .then((data) => {
         console.log('Fetched data:', data.orderData);

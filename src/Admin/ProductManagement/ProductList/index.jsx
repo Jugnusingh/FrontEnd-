@@ -12,7 +12,7 @@ const ProductList = ({ productData }) => {
   }, [productData]);
 
   const handleDelete = (productId) => {
-    axios.delete(`http://203.123.33.138:4000/product/${productId}`)
+    axios.delete(`http://localhost:4000/product/${productId}`)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

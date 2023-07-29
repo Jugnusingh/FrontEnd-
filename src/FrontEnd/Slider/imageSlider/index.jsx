@@ -17,7 +17,7 @@ const ImageSlider = ({ image }) => { // <- Add curly braces around 'images'
       {image.map((image, index) => (
         <img className='slider-mg'
           key={index}
-          src={image.ImgUrl}
+         src={`http://localhost:4000/uploads/${image.ImgUrl}`}
           alt={image.Title}
           style={{ display: index === currentSlide ? 'block' : 'none' }}
         />

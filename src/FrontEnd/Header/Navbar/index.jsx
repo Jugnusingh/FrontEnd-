@@ -12,7 +12,7 @@ const Navbar = ({ countCartItems }) => {
       <div className="grad-bar"></div>
       <nav className="navbar">
         <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo" onClick={closeMobileMenu}>
+          <NavLink exact="true" to="/" className="nav-logo" onClick={closeMobileMenu}>
             DalalTechnologies
           </NavLink>
 
@@ -21,45 +21,22 @@ const Navbar = ({ countCartItems }) => {
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
-              <NavLink
-                exact
-                to="/"
-                activeClassName="active"
-                className="nav-links"
-                onClick={closeMobileMenu}>
+              <NavLink exact="true" to="/" activeClassName="activeclassname" className="nav-links" onClick={closeMobileMenu}>
                 Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                exact
-				to="/Project"
-                activeClassName="active"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
+              <NavLink exact="true" to="/Project" activeClassName="activeclassname" className="nav-links" onClick={closeMobileMenu}>
                 Shop
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                exact
-                to="/Blogs" 
-                activeClassName="active"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
+              <NavLink exact="true" to="/Blogs" activeClassName="activeclassname" className="nav-links" onClick={closeMobileMenu}>
                 Blog
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                exact
-                to="/contact"
-                activeClassName="active"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
+              <NavLink exact="true" to="/contact" activeClassName="activeclassname" className="nav-links" onClick={closeMobileMenu}>
                 Contact Us
               </NavLink>
             </li>

@@ -32,7 +32,7 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <p>
-          copyright &copy; <a href="http://localhost:3000/">DalalTechnologies</a>
+          copyright &copy; <a href="https://203.123.33.138:3000/">DalalTechnologies</a>
         </p>
         <div className="footer-menu">
           <ul className="f-menu">
