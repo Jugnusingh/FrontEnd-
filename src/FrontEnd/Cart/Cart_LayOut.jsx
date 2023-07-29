@@ -62,7 +62,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
                   <tbody>
                     {data.map((item) => (
                       <tr key={item.id}>
-                        <td><img className='left-div-image' src={`http://203.123.33.138:4000/uploads/${item.Image}`} alt='hosi' /></td>
+                        <td><img className='left-div-image' src={`https://localhost:4000/uploads/${item.Image}`} alt='hosi' /></td>
                         <td className='title-div'>{item.Title}</td>
                         <td className='amount-div'>₹ <span>{item.Price}/-</span></td>
                         <td className='amount-div'>Qty <span>{item.qty}</span></td>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Blog.css";
 
-const API_BASE_URL = "http://203.123.33.138:4000"; // Set your backend API URL here
+const API_BASE_URL = "http://localhost:4000"; // Set your backend API URL here
 
 const Blog = ({ blogsData }) => {
   const [expandedBlogs, setExpandedBlogs] = useState([]);

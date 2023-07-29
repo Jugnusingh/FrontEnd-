@@ -40,7 +40,7 @@ const ContactUs = () => {
 
     try {
       // Send the email using an API endpoint
-      await axios.post('http://203.123.33.138:4000/Contact', inputValue);
+      await axios.post('http://localhost:4000/Contact', inputValue);
       setIsFormSubmitted(true);
       setResponseMessage('Email sent successfully!');
       setInputValue({
@@ -124,6 +124,9 @@ const ContactUs = () => {
         <div className="contact-panel contact-left-panel">
           <img src="Images/contact.png" className="contact-image" alt="" />
         </div>
+        <h2>Address </h2>
+        <p>12/196,Geeta Colony,Delhi Pin-110031
+        </p>
       </div>
     </div>
   );

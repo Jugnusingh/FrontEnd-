@@ -15,7 +15,7 @@ const CategoryForm = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('http://203.123.33.138:4000/categories');
+      const response = await axios.get('http://localhost:4000/categories');
       setCategories(response.data);
     } catch (error) {
       console.log(error);
@@ -26,12 +26,12 @@ const CategoryForm = () => {
     event.preventDefault();
     try {
       if (editing) {
-        const response = await axios.put(`http://203.123.33.138:4000/categories/${editingId}`, { category });
+        const response = await axios.put(`http://localhost:4000/categories/${editingId}`, { category });
         console.log(response);
         setEditing(false);
         setEditingId('');
       } else {
-        const response = await axios.post('http://203.123.33.138:4000/categories', { category });
+        const response = await axios.post('http://localhost:4000/categories', { category });
         console.log(response);
       }
       setCategory('');
@@ -43,7 +43,7 @@ const CategoryForm = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://203.123.33.138:4000/categories/${id}`);
+      const response = await axios.delete(`http://localhost:4000/categories/${id}`);
       console.log(response);
       fetchCategories(); // Fetch the updated categories
     } catch (error) {
@@ -53,7 +53,7 @@ const CategoryForm = () => {
 
   const handleEdit = async (id) => {
     try {
-      const response = await axios.get(`http://203.123.33.138:4000/categories/${id}`);
+      const response = await axios.get(`http://localhost:4000/categories/${id}`);
       console.log(response);
       setCategory(response.data.category);
       setEditing(true);

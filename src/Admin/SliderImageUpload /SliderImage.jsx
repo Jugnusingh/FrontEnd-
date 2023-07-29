@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import "./SliderImage.css";
+import AdminNavbar from '../adminNavbar';
 
 const SliderImage = ({ images }) => {
   const [newImage, setNewImage] = useState({
@@ -18,7 +19,11 @@ const SliderImage = ({ images }) => {
     formData.append('Image', newImage.Image); // Use 'Image' instead of 'ImgUrl'
 
     try {
+<<<<<<< HEAD
       const response = await axios.post('http://http://203.123.33.138:4000/image', formData);
+=======
+      const response = await axios.post('http://localhost:4000/image', formData);
+>>>>>>> e80122d (we are try to hosting)
       console.log('Image uploaded successfully:', response.data.newImg);
       setNewImage({
         Title: '',
@@ -32,7 +37,7 @@ const SliderImage = ({ images }) => {
 
   const handleImageDelete = async (imageId) => {
     try {
-      const response = await axios.delete(`http://203.123.33.138:4000/image/${imageId}`);
+      const response = await axios.delete(`http://localhost:4000/image/${imageId}`);
       console.log('Image deleted successfully:', response.data.deletedImage);
     } catch (error) {
       console.error('Error deleting image:', error);
@@ -40,6 +45,8 @@ const SliderImage = ({ images }) => {
   };
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="imageslider">
       {/* Form to add a new image */}
       <form onSubmit={handleImageUpload} className='imageslider-form'>
@@ -72,11 +79,16 @@ const SliderImage = ({ images }) => {
       {/* Display existing images */}
       {images.map((img) => (
         <div key={img._id} className='imageslider-image'>
+<<<<<<< HEAD
           <img src={`http://203.123.33.138:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
+=======
+          <img src={`http://localhost:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
+>>>>>>> e80122d (we are try to hosting)
           <button className='delete-button' onClick={() => handleImageDelete(img._id)}>Delete</button>
         </div>
       ))}
     </div>
+    </>
   );
 };
 
