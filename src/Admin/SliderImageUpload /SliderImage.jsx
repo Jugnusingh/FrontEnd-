@@ -19,11 +19,7 @@ const SliderImage = ({ images }) => {
     formData.append('Image', newImage.Image); // Use 'Image' instead of 'ImgUrl'
 
     try {
-<<<<<<< HEAD
-      const response = await axios.post('http://http://203.123.33.138:4000/image', formData);
-=======
       const response = await axios.post('http://localhost:4000/image', formData);
->>>>>>> e80122d (we are try to hosting)
       console.log('Image uploaded successfully:', response.data.newImg);
       setNewImage({
         Title: '',
@@ -79,11 +75,7 @@ const SliderImage = ({ images }) => {
       {/* Display existing images */}
       {images.map((img) => (
         <div key={img._id} className='imageslider-image'>
-<<<<<<< HEAD
-          <img src={`http://203.123.33.138:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
-=======
           <img src={`http://localhost:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
->>>>>>> e80122d (we are try to hosting)
           <button className='delete-button' onClick={() => handleImageDelete(img._id)}>Delete</button>
         </div>
       ))}
