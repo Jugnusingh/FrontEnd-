@@ -17,6 +17,7 @@ function YouTubeVideo() {
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=10&order=date&type=video&key=${apiKey}`
       );
+      console.log('API Response:', response.data); // Check API response in the console
       setVideos(response.data.items);
     } catch (error) {
       console.error(error);
@@ -25,13 +26,13 @@ function YouTubeVideo() {
 
   const renderVideos = () => {
     const videoCount = videos.length;
-  
+
     if (videoCount === 0) {
       return <p>Loading videos...</p>;
     }
-  
+
     const duplicatedVideos = videos.concat(videos); // Duplicate the videos array
-  
+
     return duplicatedVideos.map((video, index) => (
       <div
         key={video.id.videoId + '_duplicate_' + index}
@@ -49,6 +50,7 @@ function YouTubeVideo() {
       </div>
     ));
   };
+
   return (
     <div className="video-slider">
       {videos.length > 0 ? (

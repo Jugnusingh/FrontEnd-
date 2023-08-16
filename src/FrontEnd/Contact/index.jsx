@@ -40,7 +40,7 @@ const ContactUs = () => {
 
     try {
       // Send the email using an API endpoint
-      await axios.post('http://localhost:4000/Contact', inputValue);
+      await axios.post('https://dalaltechnologies.in:4000/Contact', inputValue);
       setIsFormSubmitted(true);
       setResponseMessage('Email sent successfully!');
       setInputValue({
@@ -126,6 +126,8 @@ const ContactUs = () => {
         </div>
         <h2>Address </h2>
         <p>12/196,Geeta Colony,Delhi Pin-110031
+          <br></br>
+          Email-jugnu908@gmail.com Mb-9654400726
         </p>
       </div>
     </div>

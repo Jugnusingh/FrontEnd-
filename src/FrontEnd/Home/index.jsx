@@ -6,6 +6,12 @@ const Home = ({ productData ,image}) => {
   return (
     <div>
       <ImageSlider  image ={image}/>
+      <br></br>
+      <center><h1>Our YouTube Video</h1></center>
+      <div className='Youtube-cannel '>
+      <YouTubeVideo/>
+      </div>
+      <br></br>
       <center><h1>About Us</h1></center>
       <div className='about-us-div'>
         <div className="about-us">
@@ -30,21 +36,7 @@ const Home = ({ productData ,image}) => {
       <p>Tmply dummy text of the printing and typesetting indust Lorem Ipsum has been theindustry's standard dummy text ever since simply dummy text of the printing and etypesetting industry. Lorem Ipsum has been the induststandard dummy text ever since en an unknown printer took a galley of type scrambledmaining.</p>
       </div>
       </div>
-      <br></br>
-      <center><h1>Our YouTube Video</h1></center>
-      <div className='Youtube-cannel '>
-      <YouTubeVideo/>
-      </div>
-      <br></br>
-      <center><h1>Our Review </h1></center>
-      <div className='Youtube-cannel'>
-      
-      </div>
-      <br></br>
-      <center><h1>write a Review </h1></center>
-      <div className='Youtube-cannel'>
-      
-      </div>
+    
     </div>
     
     

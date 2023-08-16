@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
 import "./index.css";
 import axios from 'axios';
 import Navbar from './FrontEnd/Header/Navbar';
@@ -21,6 +22,9 @@ import Disclaimer from './Policies/Disclaimer'
 import PrivacyPolicy from './Policies/PrivacyPolicy'
 import TermsAndConditions from './Policies/TermsAndConditions'
 import SliderImage from './Admin/SliderImageUpload /SliderImage';
+import Success from './FrontEnd/PaymentURl/Success';
+import Failed from './FrontEnd/PaymentURl/Failed';
+
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -31,12 +35,12 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
   const [myorders, setOrders] = useState([]);
- 
 
+  const stripePromise = loadStripe('pk_test_51NcoEZSHE6TytuIgZBS5omYXOL7Td61IHJNL8Hdn6plDudX5hwrYiKySiI8Vs9dUSGQdcjtqeKCNrvuQFePp84EV00lMAS5AQL');
 
   useEffect(() => {
     const fetchData = async () => {
-      await Promise.all([getSliderData(), getCategories(), getProductData(), fetchBlogs(),fetchOrders()]);
+      await Promise.all([getSliderData(), getCategories(), getProductData(), fetchBlogs(), fetchOrders()]);
     };
 
     fetchData();
@@ -44,7 +48,7 @@ function App() {
 
   const getSliderData = () => {
     axios
-      .get("http://localhost:4000/image")
+      .get("https://dalaltechnologies.in:4000/image")
       .then((result) => {
         setImageData(result.data.imageData);
       })
@@ -55,7 +59,7 @@ function App() {
 
   const onRemove = async (curElement) => {
     try {
-      await axios.delete(`http://localhost:4000/product/${curElement._id}`);
+
       setCartItems(cartItems.filter((x) => x._id !== curElement._id));
       setCountCartItems(countCartItems - curElement.qty);
     } catch (error) {
@@ -78,7 +82,7 @@ function App() {
     setCartMessage("added to cart");
 
     try {
-      const response = await axios.post("http://localhost:4000/product", item);
+      const response = await axios.post("https://dalaltechnologies.in:4000/product", item);
       console.log("Product added successfully:", response.data);
       updateProductData(response.data); // Call the updateProductData function
     } catch (error) {
@@ -92,7 +96,7 @@ function App() {
 
   const getProductData = () => {
     axios
-      .get("http://localhost:4000/product")
+      .get("https://dalaltechnologies.in:4000/product")
       .then((result) => {
         setProductData(result.data.productData);
       })
@@ -103,7 +107,7 @@ function App() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/Blog");
+      const response = await axios.get("https://dalaltechnologies.in:4000/Blog");
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching Blogs:", error);
@@ -112,72 +116,50 @@ function App() {
 
   const getCategories = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/categories');
+      const response = await axios.get('https://dalaltechnologies.in:4000/categories');
       setCategories(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handlePayNow = async (totalAmount,productIds,title) => {
+  const handlePayNow = async (totalAmount, productIds, title) => {
     try {
-      const orderResponse = await axios.post("http://localhost:4000/pay/orders", {
+      const orderResponse = await axios.post("https://dalaltechnologies.in/pay/orders", {
         amount: totalAmount,
-        productIds:productIds,
-        title:title
+        productIds: productIds,
+        title: title,
       });
-      console.log(orderResponse.data, "order mai kya aaya 43");
+  
       const orderData = orderResponse.data;
-      console.log(orderData, "orderData aaya  ");
-      const options = {
-        key: "rzp_test_LLTSrqLmpUtsIx",
-        amount: totalAmount * 100, // Convert to paise
-        currency: "INR",
-        order_id: orderData.id, // Make sure orderData contains the correct id field
-        handler: async (response) => {
-          console.log(response, "yyy");
-          const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-            response;
-          console.log(razorpay_signature, "razorpay_signature hai ");
-          try {
-            const verifyUrl = "http://localhost:4000/pay/verify";
-            const verificationResponse = await axios.post(verifyUrl, {
-              razorpay_order_id,
-              razorpay_payment_id,
-              razorpay_signature,
-            });
-            console.log(verificationResponse.data);
-
-            // Set the purchased product ID in state
-            // setPurchasedProductId(productIds); // Replace with the actual product ID
-            setOrders(orderData); // Set the order data
-
-            // After payment is verified, navigate to the download page
-            window.location.href = "/download";
-          } catch (error) {
-            console.log(error, "error occurred");
-          }
-        },
-        theme: {
-          color: "#121212",
-        },
-      };
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
+  
+      // Fetch session ID from your server
+      const sessionResponse = await axios.post("https://dalaltechnologies.in/payment/session", {
+        amount: totalAmount,
+        orderId: orderData.id,
+      });
+  
+      const sessionData = sessionResponse.data;
+  
+      // Redirect user to Google Pay hosted checkout form
+      if (sessionData.paymentUrl) {
+        window.location.href = sessionData.paymentUrl;
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Error initiating payment:', error);
     }
   };
-
+  
   const fetchOrders = () => {
-    fetch('http://localhost:4000/pay/orders')
-      .then((response) => response.json())
+    fetch('https://dalaltechnologies.in:4000/pay/getOrder')  // Make a GET request to your backend endpoint
+      .then((response) => response.json())  // Parse the response as JSON
       .then((data) => {
-        console.log('Fetched data:', data.orderData);
-        setOrders(data.orderData);
+        console.log('Fetched data:', data.orderData);  // Log the fetched data to the console
+        setOrders(data.orderData);  // Update the state with the fetched orders
       })
-      .catch((error) => console.error('Error fetching orders:', error));
+      .catch((error) => console.error('Error fetching orders:', error));  // Handle any errors that occur during the fetch
   };
+  
 
   return (
     <div>
@@ -195,13 +177,15 @@ function App() {
         <Route exact path="/UploadManagement" element={<UploadManagement productData={productData} categories={categories} updateProductData={updateProductData} />} />
         <Route exact path="/CategoryUpload" element={<CategoryForm categories={categories} />} />
         <Route exact path="/Order" element={<OrderManagement myorders={myorders} />} />
-        <Route exact path="/download" element={<DownloadPage productData={productData} myorders={myorders} />} /> 
-        <Route exact path="/CancellationPolicy" element={<CancellationPolicy />} /> 
-        <Route exact path="/Disclaimer" element={<Disclaimer />} /> 
-        <Route exact path="/TermsAndConditions" element={<TermsAndConditions/>} /> 
+        <Route exact path="/download" element={<DownloadPage productData={productData} myorders={myorders} />} />
+        <Route exact path="/CancellationPolicy" element={<CancellationPolicy />} />
+        <Route exact path="/Disclaimer" element={<Disclaimer />} />
+        <Route exact path="/TermsAndConditions" element={<TermsAndConditions />} />
         <Route exact path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route exact path="/PaymentFailed" element={<Failed />} />
+        <Route exact path="/PaymentSuccess" element={<Success/>} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

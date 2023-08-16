@@ -1,5 +1,7 @@
+
+
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+
 
 const ImageSlider = ({ image }) => { // <- Add curly braces around 'images'
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -17,12 +19,9 @@ const ImageSlider = ({ image }) => { // <- Add curly braces around 'images'
       {image.map((image, index) => (
         <img className='slider-mg'
           key={index}
-<<<<<<< HEAD
-        
-         src={`http://203.123.33.138:4000/uploads/${image.ImgUrl}`}
-=======
-         src={`http://localhost:4000/uploads/${image.ImgUrl}`}
->>>>>>> e80122d (we are try to hosting)
+
+         src={`https://dalaltechnologies.in:4000/uploads/${image.ImgUrl}`}
+
           alt={image.Title}
           style={{ display: index === currentSlide ? 'block' : 'none' }}
         />

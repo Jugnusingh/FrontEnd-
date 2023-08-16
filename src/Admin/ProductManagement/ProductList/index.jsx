@@ -12,7 +12,7 @@ const ProductList = ({ productData }) => {
   }, [productData]);
 
   const handleDelete = (productId) => {
-    axios.delete(`http://localhost:4000/product/${productId}`)
+    axios.delete(`https://dalaltechnologies.in:4000/product/${productId}`)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

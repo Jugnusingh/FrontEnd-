@@ -19,7 +19,7 @@ const UploadProduct = ({ categories, updateProductData }) => {
     formData.append('Image', Image);
     formData.append('Pdf', Pdf);
 
-    const url = 'http://localhost:4000/product';
+    const url = 'https://dalaltechnologies.in:4000/product';
     const response = await fetch(url, {
       method: 'POST',
       body: formData,

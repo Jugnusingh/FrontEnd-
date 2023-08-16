@@ -4,9 +4,13 @@ import { MdDelete } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Link } from 'react-router-dom';
 
+
 const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [isPolicyAccepted, setIsPolicyAccepted] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
   const canvasRef = useRef(null);
 
@@ -23,12 +27,27 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
 
   const handleClickPayNow = () => {
     if (isPolicyAccepted) {
+      if (!name || !email || !phone) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      if (!validatePhone(phone)) {
+        alert('Please enter a valid phone number.');
+        return;
+      }
+
       try {
         const productIds = data.map((item) => item._id).toString();
         const title = data.map((item) => item.Title).toString();
-        const totalAmount = data.reduce((total, { Price, qty }) => total + Price * qty, 0);
 
-        handlePayNow(totalAmount, productIds, title);
+        // Call the handlePayNow function and pass the necessary data
+        handlePayNow(totalAmount, productIds, title, name, email, phone);
       } catch (error) {
         console.log(error);
       }
@@ -40,10 +59,61 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
   const handleTogglePolicy = () => {
     setIsPolicyAccepted(!isPolicyAccepted);
   };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const validateEmail = (email) => {
+    // Implement your email validation logic here
+    // For example, a simple check for presence of '@' and '.'
+    return email.includes('@') && email.includes('.');
+  };
+
+  const validatePhone = (phone) => {
+    // Implement your phone number validation logic here
+    // You can use regular expressions or other methods
+    // For example, a simple check for length and numerical values
+    return /^[0-9]+$/.test(phone) && phone.length === 10;
+  };
+
   return (
     <>
       <div className='layout-div'>
         <div className='heading'>Shopping Cart</div>
+        <div className="input-field-cart_layout">
+          <input
+            type="name"
+            placeholder='Your Name'
+            className='input-cart_layout'
+            value={name}
+            onChange={handleNameChange}
+          />
+          <input
+            type="email"
+            placeholder='Email Id '
+            className='input-cart_layout'
+            value={email}
+            onChange={handleEmailChange}
+          />
+
+          <input
+            type="tel"
+            placeholder='Mobile No '
+            className='input-cart_layout'
+            value={phone}
+            onChange={handlePhoneChange}
+          />
+
+        </div>
         <div className='main-div'>
           <div className='left-div'>
             <Scrollbars>
@@ -62,7 +132,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
                   <tbody>
                     {data.map((item) => (
                       <tr key={item.id}>
-                        <td><img className='left-div-image' src={`https://localhost:4000/uploads/${item.Image}`} alt='hosi' /></td>
+                        <td><img className='left-div-image' src={`https://dalaltechnologies.in:4000/uploads/${item.Image}`} alt='hosi' /></td>
                         <td className='title-div'>{item.Title}</td>
                         <td className='amount-div'>₹ <span>{item.Price}/-</span></td>
                         <td className='amount-div'>Qty <span>{item.qty}</span></td>
@@ -84,9 +154,15 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
             <p>
               <span>₹ {totalAmount}</span>
             </p>
-            <button className='btn' onClick={handleClickPayNow}>
-              Proceed to Buy
+           
+            <button className="google-pay"
+              onClick={handleClickPayNow}>
             </button>
+            <br></br> <br></br> <br></br>
+              {/* <img src={`https://dalaltechnologies.in/favicon.ico`} className="company-logo-cart_layout" /> */}
+              Pay to DalalTechnologies
+          
+
             {showMessage && <div>Added to Cart</div>}
           </div>
         </div>
@@ -102,8 +178,8 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
             Term and Conditions
           </Link>
         </div>
-        
-      </div>
+
+      </div >
 
     </>
   )

@@ -9,10 +9,10 @@ flex-wrap: wrap;
 
 .flip-card {
   background-color: transparent;
-  max-width: 250px;
-  max-height: 300px;
-  min-width: 250px;
-  min-height: 300px;
+  max-width: 2400px;
+  max-height: 290px;
+  min-width: 240px;
+  min-height: 290px;
   /* padding-top: 10px; */
   border-radius: 10px;
   margin: 10px;
@@ -71,10 +71,10 @@ padding: 5px;
 }
 
 .srcimg {
-  max-width: 250px;
-  max-height: 300px;
-  min-width: 250px;
-  min-height: 300px;
+  max-width: 240px;
+  max-height: 290px;
+  min-width: 240px;
+  min-height: 290px;
   border-radius: 10px;
 }
 
