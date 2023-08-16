@@ -15,7 +15,11 @@ const CategoryForm = () => {
 
   const fetchCategories = async () => {
     try {
+<<<<<<< HEAD
       const response = await axios.get('https://dalaltechnologies.in:4000/categories');
+=======
+      const response = await axios.get('http://localhost:4000/categories');
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
       setCategories(response.data);
     } catch (error) {
       console.log(error);
@@ -26,12 +30,20 @@ const CategoryForm = () => {
     event.preventDefault();
     try {
       if (editing) {
+<<<<<<< HEAD
         const response = await axios.put(`https://dalaltechnologies.in:4000/categories/${editingId}`, { category });
+=======
+        const response = await axios.put(`http://localhost:4000/categories/${editingId}`, { category });
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
         console.log(response);
         setEditing(false);
         setEditingId('');
       } else {
+<<<<<<< HEAD
         const response = await axios.post('https://dalaltechnologies.in:4000/categories', { category });
+=======
+        const response = await axios.post('http://localhost:4000/categories', { category });
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
         console.log(response);
       }
       setCategory('');
@@ -43,7 +55,11 @@ const CategoryForm = () => {
 
   const handleDelete = async (id) => {
     try {
+<<<<<<< HEAD
       const response = await axios.delete(`https://dalaltechnologies.in:4000/categories/${id}`);
+=======
+      const response = await axios.delete(`http://localhost:4000/categories/${id}`);
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
       console.log(response);
       fetchCategories(); // Fetch the updated categories
     } catch (error) {
@@ -53,7 +69,11 @@ const CategoryForm = () => {
 
   const handleEdit = async (id) => {
     try {
+<<<<<<< HEAD
       const response = await axios.get(`https://dalaltechnologies.in:4000/categories/${id}`);
+=======
+      const response = await axios.get(`http://localhost:4000/categories/${id}`);
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
       console.log(response);
       setCategory(response.data.category);
       setEditing(true);

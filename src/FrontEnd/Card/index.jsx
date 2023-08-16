@@ -19,7 +19,11 @@ function Card({ onAdd, data, filterProduct }) {
               <div className='flip-card-front'>
                 <img
                   className='srcimg'
+<<<<<<< HEAD
                   src={`https://dalaltechnologies.in:4000/uploads/${item.Image}`}
+=======
+                  src={`http://localhost:4000/uploads/${item.Image}`}
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
                   alt='img'
                 />
               </div>
@@ -47,7 +51,11 @@ function Card({ onAdd, data, filterProduct }) {
               <div className='flip-card-front'>
                 <img
                   className='srcimg'
+<<<<<<< HEAD
                   src={`https://dalaltechnologies.in:4000/uploads/${item.Image}`}
+=======
+                  src={`http://localhost:4000/uploads/${item.Image}`}
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
                   alt='img'
                 />
               </div>

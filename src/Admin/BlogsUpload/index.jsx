@@ -24,10 +24,17 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
     try {
       if (selectedBlog) {
         // Update existing blog
+<<<<<<< HEAD
         await axios.put(`https://dalaltechnologies.in:4000/Blog/${selectedBlog._id}`, formData);
       } else {
         // Create new blog
         const response = await axios.post("https://dalaltechnologies.in:4000/Blog", formData);
+=======
+        await axios.put(`http://localhost:4000/Blog/${selectedBlog._id}`, formData);
+      } else {
+        // Create new blog
+        const response = await axios.post("http://localhost:4000/Blog", formData);
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
         const newBlog = response.data;
         setBlogs([...blogsData, newBlog]); // Append new blog to the existing list
       }
@@ -46,7 +53,11 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
 
   const handleBlogDelete = async (blog) => {
     try {
+<<<<<<< HEAD
       await axios.delete(`https://dalaltechnologies.in:4000/Blog/${blog._id}`);
+=======
+      await axios.delete(`http://localhost:4000/Blog/${blog._id}`);
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
       setBlogs(blogsData.filter((item) => item._id !== blog._id));
       resetForm();
     } catch (error) {
@@ -112,7 +123,11 @@ const BlogUpload = ({ blogsData, setBlogs }) => {
               <div className="blog-item" key={blog._id}>
                 <img
                   className="srcimg1"
+<<<<<<< HEAD
                   src={`https://dalaltechnologies.in:4000/uploads/${blog.Image}`}
+=======
+                  src={`http://localhost:4000/uploads/${blog.Image}`}
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
                   alt="img"
                 />
                 <div className="blog-content">

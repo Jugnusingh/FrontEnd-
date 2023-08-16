@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import "./Blog.css";
 
+<<<<<<< HEAD
 const API_BASE_URL = "https://dalaltechnologies.in:4000"; // Set your backend API URL here
+=======
+const API_BASE_URL = "http://localhost:4000"; // Set your backend API URL here
+>>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
 
 const Blog = ({ blogsData }) => {
   const [expandedBlogs, setExpandedBlogs] = useState([]);
