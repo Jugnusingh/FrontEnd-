@@ -19,11 +19,9 @@ const SliderImage = ({ images }) => {
     formData.append('Image', newImage.Image); // Use 'Image' instead of 'ImgUrl'
 
     try {
-<<<<<<< HEAD
+
       const response = await axios.post('https://dalaltechnologies.in:4000/image', formData);
-=======
-      const response = await axios.post('http://localhost:4000/image', formData);
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
       console.log('Image uploaded successfully:', response.data.newImg);
       setNewImage({
         Title: '',
@@ -37,11 +35,9 @@ const SliderImage = ({ images }) => {
 
   const handleImageDelete = async (imageId) => {
     try {
-<<<<<<< HEAD
+
       const response = await axios.delete(`https://dalaltechnologies.in:4000/image/${imageId}`);
-=======
-      const response = await axios.delete(`http://localhost:4000/image/${imageId}`);
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
       console.log('Image deleted successfully:', response.data.deletedImage);
     } catch (error) {
       console.error('Error deleting image:', error);
@@ -83,11 +79,9 @@ const SliderImage = ({ images }) => {
       {/* Display existing images */}
       {images.map((img) => (
         <div key={img._id} className='imageslider-image'>
-<<<<<<< HEAD
+
           <img src={`https://dalaltechnologies.in:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
-=======
-          <img src={`http://localhost:4000/uploads/${img.ImgUrl}`} alt={img.Title} />
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
           <button className='delete-button' onClick={() => handleImageDelete(img._id)}>Delete</button>
         </div>
       ))}

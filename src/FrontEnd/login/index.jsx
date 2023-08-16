@@ -37,11 +37,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-<<<<<<< HEAD
         'https://dalaltechnologies.in:4000/admin/signin',
-=======
-        'http://localhost:4000/admin/signin',
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
         inputValue
       );
       

@@ -21,11 +21,9 @@ setUsername({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
+
       const response = await axios.post("https://dalaltechnologies.in:4000/admin/signup",username)
-=======
-      const response = await axios.post("http://localhost:4000/admin/signup",username)
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
       console.log(response.data.username); // display prompt message
   } catch (error) {
     console.error(error);

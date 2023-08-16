@@ -10,13 +10,9 @@ const ProductList = ({ productData }) => {
   useEffect(() => {
     setProducts(productData);
   }, [productData]);
-
   const handleDelete = (productId) => {
-<<<<<<< HEAD
     axios.delete(`https://dalaltechnologies.in:4000/product/${productId}`)
-=======
-    axios.delete(`http://localhost:4000/product/${productId}`)
->>>>>>> e80122ddfe6a74a80b6942ef6f544bc23b06bf8d
+
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
