@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef  } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import "./index.css";
 import axios from 'axios';
@@ -23,7 +23,7 @@ import TermsAndConditions from './Policies/TermsAndConditions'
 import SliderImage from './Admin/SliderImageUpload /SliderImage';
 import Success from './FrontEnd/PaymentURl/Success';
 import Failed from './FrontEnd/PaymentURl/Failed';
-
+import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -34,7 +34,7 @@ function App() {
   const [productData, setProductData] = useState([]);
   const [imageData, setImageData] = useState([]);
   const [myorders, setOrders] = useState([]);
-
+  const cardElement = useRef(null);
   useEffect(() => {
     const fetchData = async () => {
       await Promise.all([getSliderData(), getCategories(), getProductData(), fetchBlogs(), fetchOrders()]);
@@ -83,7 +83,6 @@ function App() {
       console.error("Error adding product:", error);
     }
   };
-
   const updateProductData = (newProduct) => {
     setProductData([...productData, newProduct]);
   };
@@ -100,71 +99,64 @@ function App() {
         console.log(error, "ProductData Error");
       });
   };
-
   const fetchBlogs = async () => {
     try {
-
       const response = await axios.get("https://dalaltechnologies.in:4000/Blog");
-
       setBlogs(response.data);
     } catch (error) {
       console.error("Error fetching Blogs:", error);
     }
   };
-
   const getCategories = async () => {
     try {
-
       const response = await axios.get('https://dalaltechnologies.in:4000/categories');
-
       setCategories(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+  const handlePayNow = async (products, name, email, phone) => {
 
-  const handlePayNow = async (totalAmount, productIds, title) => {
     try {
+      const stripe = await loadStripe("pk_live_51NcoEZSHE6TytuIgf3zNPKiZPc6sx7TDghWcweMGXHo0Fvz77ECVtZEthWuSN8IkIjSh3JMt7ULdhyjeFVSs3Yqk006v2cZJKW");
+  
+      const lineItems = products.map((product) => ({
 
-      const orderResponse = await axios.post("https://dalaltechnologies.in/pay/orders", {
+        price: (product.totalAmount * 100).toString(), // Convert to string (in cents)
+        quantity: 1,
+      }));
 
-        productIds: productIds,
-        title: title,
+      console.log(lineItems,"moti ha ")
+  
+      const session = await stripe.redirectToCheckout({
+        lineItems: lineItems,
+        mode: 'payment',
+        successUrl: 'http://localhost:3000/success',
+        cancelUrl: 'http://localhost:3000/cancel',
+        customerEmail: email,
       });
   
-      const orderData = orderResponse.data;
-
-
-      // Fetch session ID from your server
-      const sessionResponse = await axios.post("https://dalaltechnologies.in/payment/session", {
-        amount: totalAmount,
-        orderId: orderData.id,
-      });
-  
-      const sessionData = sessionResponse.data;
-  
-      // Redirect user to Google Pay hosted checkout form
-      if (sessionData.paymentUrl) {
-        window.location.href = sessionData.paymentUrl;
+      if (session.error) {
+        console.log(session.error);
       }
-
     } catch (error) {
-      console.error('Error initiating payment:', error);
+      console.log(error);
     }
   };
   
-  const fetchOrders = () => {
 
-    fetch('https://dalaltechnologies.in:4000/pay/getOrder')  // Make a GET request to your backend endpoint
-      .then((response) => response.json())  // Parse the response as JSON
-
-      .then((data) => {
-        console.log('Fetched data:', data.orderData);  // Log the fetched data to the console
-        setOrders(data.orderData);  // Update the state with the fetched orders
-      })
-      .catch((error) => console.error('Error fetching orders:', error));  // Handle any errors that occur during the fetch
+  const fetchOrders = async () => {
+    try {
+      const ordersResponse = await axios.get('https://dalaltechnologies.in:4000/pay/getOrder');
+      const orders = ordersResponse.data;
+      // Process and display orders as needed
+      console.log('Fetched orders:', orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
   };
   
+
 
   return (
     <div>
@@ -173,7 +165,7 @@ function App() {
         <Route exact path='/' element={<Home productData={productData} image={imageData} />} />
         <Route exact path='/Blogs' element={<Blog blogsData={blogs} />} />
         <Route exact path='/Contact' element={<Contact />} />
-        <Route exact path="/cart" element={<Cart cartItems={cartItems} onRemove={onRemove} countCartItems={countCartItems} handlePayNow={handlePayNow} />} />
+        <Route exact path="/cart" element={<Cart cartItems={cartItems} onRemove={onRemove} countCartItems={countCartItems} handlePayNow={handlePayNow} cardElement={cardElement}  />} />
         <Route exact path="/Project" element={<Product productData={productData} onAdd={onAdd} cartMessage={cartMessage} categories={categories} />} />
         <Route exact path="/Login" element={<Login />} />
         <Route exact path="/adminPanel" element={<AdminPanel />} />

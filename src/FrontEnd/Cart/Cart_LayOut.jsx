@@ -31,23 +31,26 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
         alert('Please fill in all fields.');
         return;
       }
-
+  
       if (!validateEmail(email)) {
         alert('Please enter a valid email address.');
         return;
       }
-
+  
       if (!validatePhone(phone)) {
         alert('Please enter a valid phone number.');
         return;
       }
-
+  
       try {
-        const productIds = data.map((item) => item._id).toString();
-        const title = data.map((item) => item.Title).toString();
-
+        const products = data.map((item) => ({
+          productId: item._id,
+          productName: item.Title,
+          totalAmount: item.Price * item.qty,
+        }));
+  
         // Call the handlePayNow function and pass the necessary data
-        handlePayNow(totalAmount, productIds, title, name, email, phone);
+        handlePayNow(products, name, email, phone);
       } catch (error) {
         console.log(error);
       }
@@ -55,6 +58,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
       alert('Please accept the Term and Conditions policy before proceeding to buy.');
     }
   };
+  
 
   const handleTogglePolicy = () => {
     setIsPolicyAccepted(!isPolicyAccepted);
@@ -132,7 +136,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
                   <tbody>
                     {data.map((item) => (
                       <tr key={item.id}>
-                        <td><img className='left-div-image' src={`https://dalaltechnologies.in:4000/uploads/${item.Image}`} alt='hosi' /></td>
+                        <td><img className='left-div-image' src={`http://localhost:4000/uploads/${item.Image}`} alt='hosi' /></td>
                         <td className='title-div'>{item.Title}</td>
                         <td className='amount-div'>₹ <span>{item.Price}/-</span></td>
                         <td className='amount-div'>Qty <span>{item.qty}</span></td>
@@ -154,15 +158,14 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
             <p>
               <span>₹ {totalAmount}</span>
             </p>
-           
-            <button className="google-pay"
+        
+            <button
+              className="btn"
               onClick={handleClickPayNow}>
+              Buy Now
             </button>
             <br></br> <br></br> <br></br>
-              {/* <img src={`https://dalaltechnologies.in/favicon.ico`} className="company-logo-cart_layout" /> */}
-              Pay to DalalTechnologies
-          
-
+            Pay to DalalTechnologies
             {showMessage && <div>Added to Cart</div>}
           </div>
         </div>
@@ -178,10 +181,9 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
             Term and Conditions
           </Link>
         </div>
-
-      </div >
-
+      </div>
     </>
   )
 };
+
 export default Cart_LayOut;
