@@ -116,35 +116,35 @@ function App() {
     }
   };
   const handlePayNow = async (products, name, email, phone) => {
-
     try {
-      const stripe = await loadStripe("pk_live_51NcoEZSHE6TytuIgf3zNPKiZPc6sx7TDghWcweMGXHo0Fvz77ECVtZEthWuSN8IkIjSh3JMt7ULdhyjeFVSs3Yqk006v2cZJKW");
-  
-      const lineItems = products.map((product) => ({
+        const response = await fetch('https://dalaltechnologies.in:4000/pay/createCheckoutSession', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ products, name, email, phone }),
+        });
 
-        price: (product.totalAmount * 100).toString(), // Convert to string (in cents)
-        quantity: 1,
-      }));
+        const sessionData = await response.json();
 
-      console.log(lineItems,"moti ha ")
-  
-      const session = await stripe.redirectToCheckout({
-        lineItems: lineItems,
-        mode: 'payment',
-        successUrl: 'http://localhost:3000/success',
-        cancelUrl: 'http://localhost:3000/cancel',
-        customerEmail: email,
-      });
-  
-      if (session.error) {
-        console.log(session.error);
-      }
+        if (sessionData.error) {
+            console.log(sessionData.error);
+            return;
+        }
+
+        const stripe = await loadStripe("pk_live_51NcoEZSHE6TytuIgf3zNPKiZPc6sx7TDghWcweMGXHo0Fvz77ECVtZEthWuSN8IkIjSh3JMt7ULdhyjeFVSs3Yqk006v2cZJKW");
+
+        const session = await stripe.redirectToCheckout({
+            sessionId: sessionData.id,
+        });
+
+        if (session.error) {
+            console.log(session.error);
+        }
     } catch (error) {
-      console.log(error);
+        console.log(error);
     }
-  };
-  
-
+};
   const fetchOrders = async () => {
     try {
       const ordersResponse = await axios.get('https://dalaltechnologies.in:4000/pay/getOrder');
