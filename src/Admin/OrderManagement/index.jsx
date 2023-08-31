@@ -8,12 +8,8 @@ const OrderManagement = ({ myorders }) => {
 
   useEffect(() => {
     const filtered = myorders.filter((order) => {
-      const title = order.title ? order.title.toLowerCase() : '';
       const orderId = order._id ? order._id.toLowerCase() : '';
-      return (
-        title.includes(searchTerm.toLowerCase()) ||
-        orderId.includes(searchTerm.toLowerCase())
-      );
+      return orderId.includes(searchTerm.toLowerCase());
     });
     setFilteredOrders(filtered);
   }, [searchTerm, myorders]);
@@ -37,7 +33,7 @@ const OrderManagement = ({ myorders }) => {
       <h2>Order Management</h2>
       <input
         type="text"
-        placeholder="Search by title or Order ID"
+        placeholder="Search by Order ID"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -46,9 +42,11 @@ const OrderManagement = ({ myorders }) => {
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Title</th>
-              <th>Amount</th>
-              <th>Status</th>
+              <th>Product Name</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>User Phone</th>
+              <th>Payment Status</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
@@ -57,9 +55,11 @@ const OrderManagement = ({ myorders }) => {
             {filteredOrders.map((order) => (
               <tr key={order._id} className="fade-in">
                 <td>{order._id}</td>
-                <td>{order.title}</td>
-                <td>₹{order.amount}</td>
-                <td>{order.status}</td>
+                <td>{order.productName}</td>
+                <td>{order.userName}</td>
+                <td>{order.userEmail}</td>
+                <td>{order.userPhone}</td>
+                <td>{order.paymentStatus}</td>
                 <td>{formatIndianDate(order.createdAt)}</td>
                 <td>
                   <button>Refund</button>

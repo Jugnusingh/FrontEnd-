@@ -24,6 +24,8 @@ import SliderImage from './Admin/SliderImageUpload /SliderImage';
 import Success from './FrontEnd/PaymentURl/Success';
 import Failed from './FrontEnd/PaymentURl/Failed';
 import { loadStripe } from '@stripe/stripe-js';
+// import  stripe  from '@stripe/stripe-js';
+
 
 function App() {
   const [blogs, setBlogs] = useState([]);
@@ -133,7 +135,7 @@ function App() {
         }
 
         const stripe = await loadStripe("pk_live_51NcoEZSHE6TytuIgf3zNPKiZPc6sx7TDghWcweMGXHo0Fvz77ECVtZEthWuSN8IkIjSh3JMt7ULdhyjeFVSs3Yqk006v2cZJKW");
-
+        // const stripe = stripe('pk_test_51NcoEZSHE6TytuIgZBS5omYXOL7Td61IHJNL8Hdn6plDudX5hwrYiKySiI8Vs9dUSGQdcjtqeKCNrvuQFePp84EV00lMAS5AQL');
         const session = await stripe.redirectToCheckout({
             sessionId: sessionData.id,
         });
@@ -145,16 +147,16 @@ function App() {
         console.log(error);
     }
 };
-  const fetchOrders = async () => {
-    try {
+const fetchOrders = async () => {
+  try {
       const ordersResponse = await axios.get('https://dalaltechnologies.in:4000/pay/getOrder');
       const orders = ordersResponse.data;
-      // Process and display orders as needed
-      console.log('Fetched orders:', orders);
-    } catch (error) {
+      // Set the fetched orders in the state
+      setOrders(orders);
+  } catch (error) {
       console.error('Error fetching orders:', error);
-    }
-  };
+  }
+};
   
 
 
