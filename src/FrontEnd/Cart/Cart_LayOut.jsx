@@ -3,6 +3,7 @@ import './Cart_LayOut.css';
 import { MdDelete } from 'react-icons/md';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
@@ -49,6 +50,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
           totalAmount: item.Price * item.qty,
         }));
   
+        Cookies.set('userData', { name, email, phone });
         // Call the handlePayNow function and pass the necessary data
         handlePayNow(products, name, email, phone);
       } catch (error) {
@@ -136,7 +138,7 @@ const Cart_LayOut = ({ data, onRemove, countCartItems, handlePayNow }) => {
                   <tbody>
                     {data.map((item) => (
                       <tr key={item.id}>
-                        <td><img className='left-div-image' src={`http://localhost:4000/uploads/${item.Image}`} alt='hosi' /></td>
+                        <td><img className='left-div-image'  src={`https://dalaltechnologies.in:4000/uploads/${item.Image}`} alt='img' /></td>
                         <td className='title-div'>{item.Title}</td>
                         <td className='amount-div'>₹ <span>{item.Price}/-</span></td>
                         <td className='amount-div'>Qty <span>{item.qty}</span></td>

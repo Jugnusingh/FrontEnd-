@@ -8,7 +8,8 @@ const UploadProduct = ({ categories, updateProductData }) => {
   const [Price, setPrice] = useState(0);
   const [Image, setImage] = useState("");
   const [Pdf, setPdf] = useState("");
-
+  const [submissionMessage, setSubmissionMessage] = useState(""); // Add submission message state
+  
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -16,25 +17,38 @@ const UploadProduct = ({ categories, updateProductData }) => {
     formData.append('Description', Description);
     formData.append('Category', Category);
     formData.append('Price', Price);
-    formData.append('Image', Image);
-    formData.append('Pdf', Pdf);
-
-
+    formData.append('image', Image);
+    formData.append('pdf', Pdf);
+  
     const url = 'https://dalaltechnologies.in:4000/product';
-
+  
     const response = await fetch(url, {
       method: 'POST',
       body: formData,
     });
-
+    
     if (response.ok) {
-      const data = await response.json();
-      console.log('Product added successfully:', data);
-      updateProductData(data); // Call the updateProductData function
+      try {
+        const data = await response.json();
+        console.log('Product added successfully:', data);
+        updateProductData(data.newProduct);
+        setSubmissionMessage(data.message);
+      } catch (error) {
+        console.error('Error parsing JSON response:', error);
+      }
     } else {
-      console.error('Error adding product:', response.statusText);
+      try {
+        const errorData = await response.json();
+        console.error('Error adding product:', errorData.message);
+        setSubmissionMessage(errorData.message);
+      } catch (error) {
+        console.error('Error parsing JSON error response:', error);
+      }
     }
+    
   };
+  
+  console.log('submissionMessage:', submissionMessage); // Log the submission message
 
   return (
     <div className='mainvalue'>
@@ -74,18 +88,19 @@ const UploadProduct = ({ categories, updateProductData }) => {
             <div className='upload-div'>
               <h3>Upload Images</h3>
               <div className="group">
-                <input type="file" name="Image" accept="Image/*" onChange={(e) => setImage(e.target.files[0])} />
+                <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
                 <span className="highlight"></span>
                 <span className="bar"></span>
               </div>
               <h3>Upload Product Pdf</h3>
               <div className="group">
-                <input type="file" name="Pdf" accept="application/Pdf" onChange={(e) => setPdf(e.target.files[0])} />
+                <input type="file" name="pdf" accept="application/pdf" onChange={(e) => setPdf(e.target.files[0])} />
                 <span className="highlight"></span>
                 <span className="bar"></span>
               </div>
               <div>
                 <input className='button' type="submit" value="Submit" />
+                {submissionMessage && <p>{submissionMessage}</p>} {/* Display message if submissionMessage is not empty */}
               </div>
             </div>
           </div>

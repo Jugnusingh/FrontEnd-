@@ -5,7 +5,7 @@ import "./UploadManagement.css"
 import AdminNavbar from '../../adminNavbar'
 // import { Scrollbars } from 'react-custom-scrollbars-2';
 
-const UploadManagement = ({ productData, categories }) => {
+const UploadManagement = ({ productData, categories ,updateProductData }) => {
     return (
         <>
             <AdminNavbar />
@@ -18,7 +18,7 @@ const UploadManagement = ({ productData, categories }) => {
                 </div>
 
                 <div className='update-list'>
-                    <UploadProductData categories={categories} />
+                    <UploadProductData categories={categories} updateProductData={updateProductData} />
                 </div>
             </div>
         </>

@@ -31,10 +31,14 @@ const ProductList = ({ productData }) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.Title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProducts = searchTerm
+  ? products.filter((product) =>
+      product.Title &&
+      product.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  : products;
 
+  
   return (
     <div className="product-list-container">
       <div className="search-bar">
